@@ -10,7 +10,7 @@ Suunnitelma sivuja:
 * [Log in](https://nooramar.users.cs.helsinki.fi/tsoha/login)
 * [Tehtävät](https://nooramar.users.cs.helsinki.fi/tsoha/todolist)
 * [Tehtävän muokkaus](http://nooramar.users.cs.helsinki.fi/tsoha/task/modify)
-* [Tehtävän lisäys puuttuu toistaiseksi](https://nooramar.users.cs.helsinki.fi/tsoha)
+* [Tehtävän lisäys](http://nooramar.users.cs.helsinki.fi/tsoha/new)
 
 
 ## Työn aihe
