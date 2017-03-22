@@ -1,9 +1,20 @@
 <?php
 
-  $routes->get('/', function() {
+$routes->get('/', function() {
     HelloWorldController::index();
-  });
+});
 
-  $routes->get('/hiekkalaatikko', function() {
+$routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
-  });
+});
+
+$routes->get('/todolist', function() {
+    HelloWorldController::todo_list();
+});
+$routes->get('/task/modify', function() {
+    HelloWorldController::modify();
+});
+
+$routes->get('/login', function() {
+    HelloWorldController::login();
+});

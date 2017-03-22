@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Todo -list</h1>
+
+  <p>
+    <a href="#" class="btn btn-success">Add task to list</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Deadline</th>
+        <th>Status</th>
+        <th>Added</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td><a href="#">Do the dishes</a></td>
+        <td>24.03.2017</td>
+        <td><label class="label label-danger">In progress</label></td>
+        <td>22.03.2017</td>
+        <th><a class="btn btn-default btn-sm" href="#">Modify</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
