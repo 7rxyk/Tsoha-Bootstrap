@@ -14,6 +14,10 @@ class HelloWorldController extends BaseController {
     public static function todo_list() {
         View::make('suunnitelmat/todo_list.html');
     }
+    
+    public static function newTask() {
+        View::make('suunnitelmat/new.html');
+    }
 
     public static function modify() {
         View::make('suunnitelmat/modify.html');

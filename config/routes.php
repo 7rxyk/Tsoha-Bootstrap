@@ -18,3 +18,7 @@ $routes->get('/task/modify', function() {
 $routes->get('/login', function() {
     HelloWorldController::login();
 });
+
+$routes->get('/new', function() {
+    HelloWorldController::newTask();
+});
