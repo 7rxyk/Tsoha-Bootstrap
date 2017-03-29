@@ -4,7 +4,7 @@ class HelloWorldController extends BaseController {
 
     public static function index() {
 // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-        View::make('home.html');
+        View::make('task/index.html');
     }
 
     public static function sandbox() {
@@ -16,7 +16,7 @@ class HelloWorldController extends BaseController {
     }
     
     public static function newTask() {
-        View::make('suunnitelmat/new.html');
+        View::make('task/new.html');
     }
 
     public static function modify() {

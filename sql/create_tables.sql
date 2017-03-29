@@ -26,11 +26,11 @@ CREATE TABLE Category (
 CREATE TABLE Task(
   id SERIAL  	PRIMARY KEY,
   person_id 	INTEGER REFERENCES Person(id), -- Viiteavain person-tauluun
-  name 			varchar(50) NOT NULL,
-  done 			boolean DEFAULT FALSE,
+  name 		varchar(50) NOT NULL,
+  done 		boolean DEFAULT FALSE,
   description 	varchar(400),
-  deadline  	TIMESTAMP,
-  added 		TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0),
+  deadline  	DATE,
+  added 	DATE,
   priority_id 	INTEGER REFERENCES Priority (id),
   status_id 	INTEGER REFERENCES Task_status (id)
 );

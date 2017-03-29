@@ -1,37 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Add new task</h1>
+<h1>Add new task</h1>
 
-  <form method="post" action="{{base_path}}/task">
+<form method="post" action="{{base_path}}/task">
     <div class="form-group">
-      <label>Task</label>
-      <input class="input" value="" type="text" placeholder="TASK">
+        <label>Task</label>
+        <input class="input" value="" type="text" placeholder="TASK">
+
+        <label>Additional info</label>
+        <textarea class="input" placeholder="ADDITIONAL INFO"></textarea>
+
+        <label>Deadline</label>
+        <input class="input" value="" type="text">
+
+        <label>Priority</label>
+        <select name="priority">
+            <option value="high">HIGH</option>
+            <option value="medium">MEDIUM</option>
+            <option value="low">LOW</option>
+        </select>
     </div>
-	<div class="form-group">
-	<label>Additional info</label>
-      <textarea class="input" placeholder="ADDITIONAL INFO">
-      </textarea>
+        <label>Status</label> <br>
+        <label><input type="radio" name="status" value="notdone"/>Not Started</label>
+        <label><input type="radio" name="status" value="started"/>In Progress</label>
+        <label><input type="radio" name="status" value="done"/>Completed</label>
+        <br>
+        <br>
     <div class="form-group">
-      <label>Deadline</label>
-      <input class="input" value="" type="text" placeholder="NAME">
+        <button class="button" type="submit" >Save</button>
     </div>
-	  <div class="form-group">
-      <label>Priority</label>
-	  <select name="priority">
-      <option value="high">High priority</option>
-      <option value="medium">Medium priority</option>
-      <option value="low">Low priority</option>
-    </select>
-    </div>
-	<div class="form-group">
-      <label>Status</label>
-	    <input type="radio" name="status" value="notdone" checked> Not Started<br>
-		<input type="radio" name="status" value="started"> In Progress<br>
-		<input type="radio" name="status" value="done"> Completed <br>
-    </div>
-    </div>
-    <div class="form-group">
-      <button type="submit">Save</button>
-    </div>
-  </form>
+</form>
 {% endblock %}
