@@ -5,27 +5,27 @@
 <form method="post" action="{{base_path}}/task">
     <div class="form-group">
         <label>Task</label>
-        <input class="input" value="" type="text" placeholder="TASK">
+        <input class="input" name="name" value="" type="text" placeholder="TASK">
 
         <label>Additional info</label>
-        <textarea class="input" placeholder="ADDITIONAL INFO"></textarea>
+        <textarea class="input" name="description" placeholder="ADDITIONAL INFO"></textarea>
 
         <label>Deadline</label>
-        <input class="input" value="" type="text">
-
-        <label>Priority</label>
-        <select name="priority">
-            <option value="high">HIGH</option>
-            <option value="medium">MEDIUM</option>
-            <option value="low">LOW</option>
-        </select>
+        <input class="input" name="deadline" value="" type="text">
     </div>
-        <label>Status</label> <br>
-        <label><input type="radio" name="status" value="notdone"/>Not Started</label>
-        <label><input type="radio" name="status" value="started"/>In Progress</label>
-        <label><input type="radio" name="status" value="done"/>Completed</label>
-        <br>
-        <br>
+    <label>Priority</label>
+    <select class="form-control" name="priority_id">
+        <option title="high" name="priority_id" value="1" id="1">HIGH</option>
+        <option title="medium" name="priority_id" value="2" id="2">MEDIUM</option>
+        <option title="low" name="priority_id" value="3" id="3">LOW</option>
+    </select>
+
+    <label>Status</label> <br>
+    <label><input type="radio" name="status_id" value="1"/>Not Started</label>
+    <label><input type="radio" name="status_id" value="2"/>In Progress</label>
+    <label><input type="radio" name="status_id" value="3"/>Completed</label>
+    <br>
+    <br>
     <div class="form-group">
         <button class="button" type="submit" >Save</button>
     </div>

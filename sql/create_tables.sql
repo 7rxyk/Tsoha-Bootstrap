@@ -13,14 +13,14 @@ CREATE TABLE priority (
 );
 
 CREATE TABLE task_status (
-  id    	PRIMARY KEY,
+  id SERIAL  	PRIMARY KEY,
   title	 	VARCHAR(20) NOT NULL UNIQUE,
   level 	INTEGER     NOT NULL UNIQUE
 );
 
 CREATE TABLE category (
   id SERIAL PRIMARY KEY,
-  title    	VARCHAR(20) NOT NULL,
+  title    	VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE task(
@@ -30,8 +30,8 @@ CREATE TABLE task(
   done 		boolean DEFAULT FALSE,
   description 	varchar(400),
   deadline  	DATE,
-  added 	DATE,
-  priority_id 	INTEGER REFERENCES priority (id),
+  added 	DATE DEFAULT current_timestamp,
+  priority_id INTEGER REFERENCES priority (id),
   status_id 	INTEGER REFERENCES task_status (id)
 );
 
@@ -40,4 +40,6 @@ CREATE TABLE Task_category (
   task_id     INTEGER REFERENCES task (id),
   category_id INTEGER REFERENCES category (id)
 );
+
+
 

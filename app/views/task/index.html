@@ -2,9 +2,9 @@
 {% block content %}
 <h1>To do -list</h1>
 
-<a href="{{base_path}}/task/new" class="button">Add new task!</a>
+<a href="{{base_path}}/task/new" class=".button">Add new task!</a>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Task</th>
@@ -17,22 +17,24 @@
         </tr>
     </thead>
 
+
     <tbody>
         {% for task in tasks %}
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</td>
             <td>{{task.deadline}}</td>
+            <td>{{task.status_id}}</td>
+            <td>{{task.priority_id}}</td>
             <td>
                 {% if task.done %}
-                <label class="label label-success">Done
+                <label class="btn-lg-success">Done
                     {% else %}
-                    <label class="label label-danger">In progress
+                    <label class="btn-lg-info">In progress
                         {% endif %}
                         </td>
-                        <td>{{task.priority_id}}</td>
-                        <td>{{task.category_id}}</td>
                         <td>{{task.added}}</td>
-                        <td><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Modify</a></td>
+                        
+                        <td><a class=".button" href="{{base_path}}/task/{{task.id}}/edit">Edit</a></td>
                         </tr>
                         {% endfor %}
                         </tbody>

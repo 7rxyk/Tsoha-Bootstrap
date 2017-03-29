@@ -13,8 +13,8 @@
 }
 
 body, tbody {
-    background: #7B7E7D;
-    color: #EDEBD7;
+    background: #686868;
+    color: #F6F5EC;
     text-align: center;
     margin: auto;
 }
@@ -24,7 +24,7 @@ form {
     display: block;
     margin: 0 auto 100px;
     padding: 80px;
-    background: #3D413D;
+    background: #595959;
     z-index: 1;
     max-width: 600px;
     text-align: center;
@@ -35,7 +35,7 @@ input, textarea, select {
     font-family: "Roboto", sans-serif;
     outline: 0;
     background: #F6F5EC;
-    color: #4B5358;
+    color: #595959;
     width: 100%;
     border: 0;
     margin: 0 0 15px;
@@ -61,7 +61,7 @@ input.radio {
     margin: 2px 0 0 2px;
 }
 
-button {
+button, .button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -84,10 +84,21 @@ button:hover,.form button:active,.form button:focus {
 h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 122px;
-    color: #F6E767;
+    color: #ffadc6;
     text-align: center;
     padding-bottom: 50px;
 }
 
+tbody tr:hover  {
+    background-color: #ffadc6;
+}
 
+a.button{
+    color: #F6F5EC;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    
+}
 
