@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+@import url('https://fonts.googleapis.com/css?family=Mr+De+Haviland');
+
 #main-container{
   max-width: 1200px;
   padding: 10px 25px;
@@ -8,3 +12,65 @@
   max-width: 1200px;
   margin: 0px auto;
 }
+
+body {
+	background: #7B7E7D;
+	color: #F0EFF4;
+}
+
+form {
+	position: relative;
+	display: block;
+	margin: 20px;
+	padding: 50px;
+	background: #3D413D;
+    z-index: 1;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #dedcdc;
+	color: #555;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+	display: block;
+    height: 34px;
+	text-align: center;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #00DBD5;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #808080;
+    font-size: 16px;
+    font-weight: bold;
+	text-align: center;
+    transition: all ease;
+    cursor: pointer;
+}
+
+.form button:hover,.form button:active,.form button:focus {
+    background: #17DED8;
+}
+
+h1 {
+	font-family: 'Mr De Haviland', cursive;
+	font-size: 42px;
+	color: #808080;
+}
+
+
+
