@@ -8,9 +8,9 @@ Linkit:
 Suunnitelma sivuja:
 
 * [Log in](https://nooramar.users.cs.helsinki.fi/tsoha/login)
-* [Tehtävät](https://nooramar.users.cs.helsinki.fi/tsoha/todolist)
-* [Tehtävän muokkaus](http://nooramar.users.cs.helsinki.fi/tsoha/task/modify)
-* [Tehtävän lisäys](http://nooramar.users.cs.helsinki.fi/tsoha/new)
+* [Tehtävät](https://nooramar.users.cs.helsinki.fi/tsoha/)
+* [Tehtävän muokkaus](http://nooramar.users.cs.helsinki.fi/tsoha/task/1/edit)
+* [Tehtävän lisäys](http://nooramar.users.cs.helsinki.fi/tsoha/task/new)
 
 
 ## Työn aihe
