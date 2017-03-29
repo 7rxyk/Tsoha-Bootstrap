@@ -12,7 +12,7 @@
     margin: 0px auto;
 }
 
-body {
+body, tbody {
     background: #7B7E7D;
     color: #EDEBD7;
     text-align: center;

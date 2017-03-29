@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>
+    <a href="{{base_path}}/task/{{task.id}}/edit" class="button">Edit</a>
+</p>
+
+<h1 class="list-group-item">Task name: {{item.name}}</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Created on:</strong> {{task.added}}</li>
+    <li class="list-group-item"><strong>Deadline:</strong> {{task.deadline}}</li>
+    <li class="list-group-item"><strong>Deadline:</strong> {{task.description}}</li>
+</ul>
+{% endblock %}

@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Käyttäjän Henri pelikirjasto</h1>
+<h1>To do -list</h1>
 
-<p>
-    <a href="{{base_path}}/task/new" class="btn btn-success">Lisää peli</a>
-</p>
+<a href="{{base_path}}/task/new" class="button">Add new task!</a>
 
-<table class="table table-striped table-bordered">
+<table>
     <thead>
         <tr>
             <th>Task</th>

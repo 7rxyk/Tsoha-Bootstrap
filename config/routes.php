@@ -1,43 +1,40 @@
 <?php
 
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+$routes->get('/todolist', function() {
+    TaskController::listTasks();
 });
 
-$routes->get('/todolist', function() {
-    HelloWorldController::todo_list();
-});
-$routes->get('/task/modify', function() {
-    HelloWorldController::modify();
-});
 
 $routes->get('/login', function() {
-    HelloWorldController::login();
-});
-
-$routes->get('/new', function() {
-    HelloWorldController::newTask();
+    TaskController::login();
 });
 
 // Etusivu (taskien listaussivu)
-$routes->get('/', function(){
-  TaskController::index();
+$routes->get('/', function() {
+    TaskController::index();
 });
+
 // taskien listaussivu
-$routes->get('/task', function(){
-  TaskController::index();
+$routes->get('/task/index', function() {
+    TaskController::index();
 });
 
 // taskien lisääminen tietokantaan
-$routes->post('/task', function(){
-  TaskController::store();
+$routes->post('/task', function() {
+    TaskController::store();
 });
+
 // taskien lisäyslomakkeen näyttäminen
-$routes->get('/task/new', function(){
-  TaskController::create();
+$routes->get('/task/new', function() {
+    TaskController::newTask();
 });
+
 // Määritetään reitti task/:id vasta tässä, jottei se mene sekaisin reitin task/new kanssa
 // taskien esittelysivu
-$routes->get('/task/:id', function($id){
-  TaskController::show($id);
+$routes->get('/task/:id', function($id) {
+    TaskController::showTask($id);
+});
+//Taskin muokkaus
+$routes->get('/task/:id/edit', function ($id) {
+    TaskController::edit($id);
 });

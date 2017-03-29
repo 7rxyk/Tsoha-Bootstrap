@@ -53,10 +53,8 @@ class Task extends BaseModel {
                 'priority_id' => $row['priority_id'],
                 'status_id' => $row['status_id']
             ));
-
             return $task;
         }
-
         return null;
     }
 
