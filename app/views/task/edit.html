@@ -11,25 +11,25 @@
         <textarea class="input" name="description" value="{{attributes.description}}" placeholder="ADDITIONAL INFO"></textarea>
 
         <label>Deadline</label>
-        <input type="text" ng-model="date2" placeholder="YYYY-MM-DD" value="{{attributes.deadline}}"/>
-       <date-picker ng-model="date2" parse-date="parseDate" format-date="formatDate"></date-picker>
+        <input type="text" name="deadline" placeholder="YYYY-MM-DD" value="{{attributes.deadline}}"/>
     </div>
+ 
     <label>Priority</label>
-    <select class="form-control" name="priority_id">
-        <option title="high" name="priority_id" value="{{attributes.priority.title}}" id="1">HIGH</option>
-        <option title="medium" name="priority_id" value="{{attributes.priority.title}}" id="2">MEDIUM</option>
-        <option title="low" name="priority_id" value="{{attributes.priority.title}}" id="3">LOW</option>
+    <select class="form-control" name="priority_v">
+        <option title="high"  value="High">HIGH</option>
+        <option title="medium"  value="Medium">MEDIUM</option>
+        <option title="low"  value="Low">LOW</option>
     </select>
 
-<fieldset>
-		<legend>Select a task status: </legend>
-		<label for="1" class="checkbox"><span class="checkbox"></span>Not Started</label>
-		<input type="radio" name="radio-1" id="1" value="{{attributes.status}}" class=".checkbox">
-		<label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
-		<input type="radio" name="radio-1" id="2" value="{{attributes.status}}" class=".checkbox">
-		<label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>
-		<input type="radio" name="radio-1" id="3" value="{{attributes.status}}" class=".checkbox">
-	</fieldset>
+    <fieldset>
+        <legend>Select a task status: </legend>
+        <label for="1" class="checkbox"><span class="checkbox"></span>Not Started</label>
+        <input type="radio" name="status_id" value="Not Started" class=".checkbox">
+        <label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
+        <input type="radio" name="status_id" value="In Progress" class=".checkbox">
+        <label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>
+        <input type="radio" name="status_id" value="Completed" class=".checkbox">
+    </fieldset>
     <br>
     <br>
     <div class="form-group">

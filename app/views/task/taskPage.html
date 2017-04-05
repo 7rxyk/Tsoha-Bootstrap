@@ -4,26 +4,18 @@
 
 <h1>{{task.name}}</h1>
 <p>
-  {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
-  <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Edit task!</a>
+    {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+    <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Edit task!</a>
 </p>
 
 <ul>
-  <li><strong>Deadline:</strong> {{task.deadline}}</li>
-  <li><strong>Priority:</strong> {{task.priority}}</li>
-  <li><strong>Status:</strong>
-    {% if task.status %}
-      <label class="label label-success">Done!</label>
-    {% else if %}
-      <label class="label label-info">In progress</label>
-    {% else %}
-          <label class="label label-danger">Not Started</label>
-    {% endif %}
-  </li>
-  <li><strong>Added:</strong> {{task.added}}</li>
+    <li><strong>Deadline:</strong> {{task.deadline}}</li>
+    <li><strong>Priority:</strong> {{task.priority_v}}</li>
+    <li><strong>Status:</strong> {{task.status}}</li>
+    <li><strong>Added:</strong> {{task.added}}</li>
 </ul>
 
 <p>
-  {{task.description}}
+    {{task.description}}
 </p>
 {% endblock %}

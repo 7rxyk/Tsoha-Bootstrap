@@ -2,9 +2,14 @@
 {% block content %}
 <h1>Log in to the Todo app</h1>
 
+{% if error %}
+        {% for e in error %}
+          <li>{{e}}</li>
+        {% endfor %}
+{% endif %}
 <form method="post" action="{{base_path}}/login">
     <div class="form-group">
-        <input name="name" class="input" type="text" placeholder="USERNAME" value="{{username}}">
+        <input name="username" class="input" type="text" placeholder="USERNAME" value="{{username}}">
     </div>
     <div class="form-group">
         <input name="password" class="input" type="password" placeholder="PASSWORD">

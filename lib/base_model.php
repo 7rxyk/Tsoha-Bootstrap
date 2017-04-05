@@ -1,23 +1,23 @@
 <?php
 
-  class BaseModel{
+class BaseModel {
 
     protected $validators;
 
-    public function __construct($attributes = null){
-      foreach($attributes as $attribute => $value){
-        if(property_exists($this, $attribute)){
-          $this->{$attribute} = $value;
+    public function __construct($attributes = null) {
+        foreach ($attributes as $attribute => $value) {
+            if (property_exists($this, $attribute)) {
+                $this->{$attribute} = $value;
+            }
         }
-      }
     }
 
-    public function errors(){
-      $errors = array();
-      foreach($this->validators as $validator){
-        $errors += $this->{$validator}();
-      }
-      return $errors;
+    public function errors() {
+        $errors = array();
+        foreach ($this->validators as $validator) {
+            $errors += $this->{$validator}();
+        }
+        return $errors;
     }
 
     public static function validate_string_length($string, $minlength, $maxlength) {
@@ -36,4 +36,4 @@
         }
     }
 
-  }
+}

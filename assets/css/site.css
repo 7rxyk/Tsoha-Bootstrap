@@ -17,6 +17,7 @@ body, tbody {
     color: #F6F5EC;
     text-align: center;
     margin: auto;
+    font-size: 20px;
 }
 
 form {
@@ -26,7 +27,7 @@ form {
     padding: 80px;
     background: #595959;
     z-index: 1;
-    max-width: 600px;
+    max-width: 700px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -118,14 +119,18 @@ checkbox {
     font-family: Arial,Helvetica,sans-serif;
     font-size: 1em;
     padding: .4em 1em;
-    display: inline-block;
+    display: inline;
     position: relative;
     line-height: normal;
     margin-right: .1em;
     cursor: pointer;
     vertical-align: middle;
-    text-align: center;
-    user-select: none;
     overflow: visible;
     border-radius: 3px;
 }
+legend {
+    color: #F6F5EC;
+    text-align: left;
+    font-size: 20px;
+}
+    

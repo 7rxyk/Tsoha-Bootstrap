@@ -2,14 +2,14 @@
 
 class Task extends BaseModel {
 
-    public $id, $name, $description, $deadline, $added, $priority, $status;
+    public $id, $taskname, $description, $deadline, $added, $priority, $status;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_description', 'validate_deadline', 'validate_priority_id',
+        $this->validators = array('validate_name', 'validate_description', 'validate_deadline', 'validate_priority',
             'validate_status');
     }
-
+    
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Task');
         $query->execute();
@@ -20,18 +20,40 @@ class Task extends BaseModel {
         foreach ($rows as $row) {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
-                'name' => $row['name'],
+                'taskname' => $row['taskname'],
                 'description' => $row['description'],
                 'deadline' => $row['deadline'],
                 'added' => $row['added'],
-                'priority_id' => $row['priority_id'],
-                'status_id' => $row['status_id']
+                'priority_v' => $row['priority_v'],
+                'status' => $row['status']
             ));
         }
 
         return $tasks;
     }
-    
+
+    public static function findPerUser($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Task WHERE person_id = :id');
+        $query->execute(array('id' => $id));
+
+        $rows = $query->fetchAll();
+        $tasks = array();
+
+        foreach ($rows as $row) {
+            $tasks[] = new Task(array(
+                'id' => $row['id'],
+                'taskname' => $row['taskname'],
+                'description' => $row['description'],
+                'deadline' => $row['deadline'],
+                'added' => $row['added'],
+                'priority_v' => $row['priority_v'],
+                'status' => $row['status']
+            ));
+        }
+
+        return $tasks;
+    }
+
     public static function findOne($id) {
         $query = DB::connection()->prepare('SELECT * FROM Task WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -40,12 +62,12 @@ class Task extends BaseModel {
         if ($row) {
             $task = new Task(array(
                 'id' => $row['id'],
-                'name' => $row['name'],
+                'taskname' => $row['taskname'],
                 'description' => $row['description'],
                 'deadline' => $row['deadline'],
                 'added' => $row['added'],
-                'priority_id' => $row['priority_id'],
-                'status_id' => $row['status_id']
+                'priority_v' => $row['priority_v'],
+                'status' => $row['status']
             ));
             return $task;
         }
@@ -53,18 +75,18 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Task (name,  description, deadline, priority_id, status_id) VALUES (:name, :description, :deadline, :priority_id, :status_id) RETURNING id');
-        $query->execute(array('name' => $this->name, 'description' => $this->description, 'deadline' => $this->deadline, 'priority_id' => $this->priority, 'status_id' => $this->status));
+        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  description, deadline, priority_v, status) VALUES (:taskname, :description, :deadline, :priority, :status) RETURNING id');
+        $query->execute(array('taskname' => $this->taskname, 'description' => $this->description, 'deadline' => $this->deadline, 'priority_v' => $this->priority, 'status' => $this->status));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
 
     public function validate_name() {
         $errors = array();
-        if($this->name == '' || $this->name == null){
-            $errors[] = 'Task name can\'t be empty!';
+        if ($this->taskname == '' || $this->taskname == null) {
+            $errors[] = 'Taskname can\'t be empty!';
         }
-        if(strlen($this->name) < 3){
+        if (strlen($this->taskname) < 3) {
             $errors[] = 'Give at least 3 characters long taskname';
         }
         return $errors;
@@ -90,9 +112,9 @@ class Task extends BaseModel {
         return $errors;
     }
 
-    public function validate_priority_id() {
+    public function validate_priority() {
         $errors = array();
-        if (self::number($this->priority_id) === false) {
+        if (self::number($this->priority) === false) {
             $errors[] = 'Choose priority for the task!';
         }
         return $errors;
@@ -104,6 +126,10 @@ class Task extends BaseModel {
             $errors[] = 'Choose current status for the task!';
         }
         return $errors;
+    }
+    
+    public function errors() {
+        return array();
     }
 
 }

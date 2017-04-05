@@ -21,13 +21,13 @@
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</td>
             <td>{{task.deadline}}</td>
-            <td>{{task.status_id}}</td>
-            <td>{{task.priority_id}}</td>
+            <td>{{task.status}}</td>
+            <td>{{task.priority_v}}</td>
             <td>{{task.added}}</td>
-                        
+
             <td><a class=".button" href="{{base_path}}/task/{{task.id}}/edit">Edit</a></td>
         </tr>
-     {% endfor %}
- </tbody>
- </table>
-  {% endblock %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

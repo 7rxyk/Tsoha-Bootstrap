@@ -1,11 +1,27 @@
 <?php
 
 $routes->get('/', function() {
-    TaskController::index();
+    PersonController::login();
 });
 
-$routes->get('/task/index', function() {
-    TaskController::index();
+$routes->get('/login', function() {
+    PersonController::login();
+});
+
+$routes->post('/login', function() {
+    PersonController::handle_login();
+});
+
+$routes->post('/logout', function () {
+    PersonController::logout();
+});
+
+$routes->get('/task/list', function() {
+    TaskController::userTask();
+});
+
+$routes->get('/task/listNewLogin', function() {
+    TaskController::userTaskOnLogin();
 });
 
 $routes->post('/task', function() {
@@ -24,26 +40,10 @@ $routes->get('/task/:id/edit', function ($id) {
     TaskController::edit($id);
 });
 
-$routes->post('/task/:id/edit', function($id){
-  TaskController::update($id);
+$routes->post('/task/:id/edit', function($id) {
+    TaskController::update($id);
 });
 
-$routes->post('/task/:id/destroy', function($id){
-  TaskController::destroy($id);
-});
-
-$routes->get('/login', function(){
-  PersonController::login();
-});
-
-$routes->post('/login', function(){
-  PersonController::handle_login();
-});
-
-$routes->get('/', function () {
-    PersonController::requireLogin();
-});
-
-$routes->get('/logout', function () {
-    PersonController::logout();
+$routes->post('/task/:id/destroy', function($id) {
+    TaskController::destroy($id);
 });
