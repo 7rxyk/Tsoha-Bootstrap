@@ -2,20 +2,20 @@
 
 CREATE TABLE person(
   id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
-  name 		varchar(50) NOT NULL, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
+  username 		varchar(50) NOT NULL UNIQUE, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
   password 	varchar(50) NOT NULL
 );
 
 CREATE TABLE priority (
   id SERIAL PRIMARY KEY,
   title 	VARCHAR(20) NOT NULL UNIQUE,
-  level 	INTEGER     NOT NULL UNIQUE
+  level 	INTEGER NOT NULL UNIQUE
 );
 
 CREATE TABLE task_status (
   id SERIAL  	PRIMARY KEY,
   title	 	VARCHAR(20) NOT NULL UNIQUE,
-  level 	INTEGER     NOT NULL UNIQUE
+  level 	INTEGER NOT NULL UNIQUE
 );
 
 CREATE TABLE category (
@@ -34,7 +34,7 @@ CREATE TABLE task(
   status_id 	INTEGER REFERENCES task_status (id)
 );
 
-CREATE TABLE Task_category (
+CREATE TABLE task_category (
   id          SERIAL PRIMARY KEY,
   task_id     INTEGER REFERENCES task (id),
   category_id INTEGER REFERENCES category (id)

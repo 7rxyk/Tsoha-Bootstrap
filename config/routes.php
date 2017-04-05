@@ -1,13 +1,5 @@
 <?php
 
-$routes->get('/todolist', function() {
-    TaskController::listTasks();
-});
-
-
-$routes->get('/login', function() {
-    TaskController::login();
-});
 
 // Etusivu (taskien listaussivu)
 $routes->get('/', function() {
@@ -50,9 +42,18 @@ $routes->post('/task/:id/destroy', function($id){
 
 $routes->get('/login', function(){
   // Kirjautumislomakkeen esittäminen
-  UserController::login();
+  PersonController::login();
 });
+
 $routes->post('/login', function(){
   // Kirjautumisen käsittely
-  UserController::handle_login();
+  PersonController::handle_login();
+});
+
+$routes->get('/', function () {
+    PersonController::requireLogin();
+});
+
+$routes->get('/logout', function () {
+    PersonController::logout();
 });

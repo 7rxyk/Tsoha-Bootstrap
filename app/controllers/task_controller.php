@@ -9,11 +9,8 @@ class TaskController extends BaseController {
     }
 
     public static function newTask() {
+        self::check_logged_in();
         View::make('task/new.html');
-    }
-    
-    public static function login() {
-        View::make('suunnitelmat/login.html');
     }
 
     public static function showTask($id) {
@@ -22,6 +19,7 @@ class TaskController extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
         // Alustetaan uusi Task-luokan olion käyttäjän syöttämillä arvoilla
@@ -46,10 +44,12 @@ class TaskController extends BaseController {
     }
 
     public static function edit($id) {
+        self::check_logged_in();
         View::make('task/edit.html');
     }
 
     public static function update($id){
+        self::check_logged_in();
         $params = $_POST;
 
         $attributes = array(
@@ -73,6 +73,7 @@ class TaskController extends BaseController {
     }
 
    public static function destroy($id){
+        self::check_logged_in();
         $task = new Task(array('id' => $id));
         $task->destroy();
         Redirect::to('/task', array('message' => 'Task deleted succesfully!'));
