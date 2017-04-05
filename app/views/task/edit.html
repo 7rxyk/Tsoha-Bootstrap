@@ -11,7 +11,8 @@
         <textarea class="input" name="description" value="{{attributes.description}}" placeholder="ADDITIONAL INFO"></textarea>
 
         <label>Deadline</label>
-        <input class="input" name="deadline" value="{{attributes.deadline}}" type="text">
+        <input type="text" ng-model="date2" placeholder="YYYY-MM-DD" value="{{attributes.deadline}}"/>
+       <date-picker ng-model="date2" parse-date="parseDate" format-date="formatDate"></date-picker>
     </div>
     <label>Priority</label>
     <select class="form-control" name="priority_id">
@@ -35,4 +36,8 @@
         <button class="button" type="submit" >Update</button>
     </div>
 </form>
+
+<link href="{{base_path}}/assets/css/angular-date-picker.css" rel="stylesheet">
+
+<script type="text/javascript" src="{{base_path}}/assets/js/angular-date-picker.js"></script>
 {% endblock %}
