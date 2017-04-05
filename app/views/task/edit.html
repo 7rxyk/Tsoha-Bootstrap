@@ -2,25 +2,37 @@
 {% block content %}
 <h1>Update task</h1>
 
-<form>
-    <div class="checkbox">
-        <label><input type="checkbox">Done</label>
-    </div>
+<form method="post" action="{{base_path}}/task/{{task.id}}/edit">
     <div class="form-group">
         <label>Task</label>
-        <input class="form-control" value="Do the dishes" type="text">
-    </div>
-    <div class="form-group">
-        <label>Deadline</label>
-        <input class="form-control" value="24.03.2017" type="text">
-    </div>
-    <div class="form-group">
+        <input class="input" name="name" value="{{attributes.name}}" type="text" placeholder="TASK">
+
         <label>Additional info</label>
-        <textarea class="form-control"> Use the environmental friendly washing program
-        </textarea>
+        <textarea class="input" name="description" value="{{attributes.description}}" placeholder="ADDITIONAL INFO"></textarea>
+
+        <label>Deadline</label>
+        <input class="input" name="deadline" value="{{attributes.deadline}}" type="text">
     </div>
+    <label>Priority</label>
+    <select class="form-control" name="priority_id">
+        <option title="high" name="priority_id" value="{{attributes.priority.title}}" id="1">HIGH</option>
+        <option title="medium" name="priority_id" value="{{attributes.priority.title}}" id="2">MEDIUM</option>
+        <option title="low" name="priority_id" value="{{attributes.priority.title}}" id="3">LOW</option>
+    </select>
+
+<fieldset>
+		<legend>Select a task status: </legend>
+		<label for="1" class="checkbox"><span class="checkbox"></span>Not Started</label>
+		<input type="radio" name="radio-1" id="1" value="{{attributes.status}}" class=".checkbox">
+		<label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
+		<input type="radio" name="radio-1" id="2" value="{{attributes.status}}" class=".checkbox">
+		<label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>
+		<input type="radio" name="radio-1" id="3" value="{{attributes.status}}" class=".checkbox">
+	</fieldset>
+    <br>
+    <br>
     <div class="form-group">
-        <button type="submit">Save</button>
+        <button class="button" type="submit" >Update</button>
     </div>
 </form>
 {% endblock %}

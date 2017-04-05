@@ -5,25 +5,30 @@
 <form method="post" action="{{base_path}}/task">
     <div class="form-group">
         <label>Task</label>
-        <input class="input" name="name" value="" type="text" placeholder="TASK">
+        <input class="input" name="name" value="{{attributes.name}}" type="text" placeholder="TASK">
 
         <label>Additional info</label>
-        <textarea class="input" name="description" placeholder="ADDITIONAL INFO"></textarea>
+        <textarea class="input" name="description" value="{{attributes.description}}" placeholder="ADDITIONAL INFO"></textarea>
 
         <label>Deadline</label>
-        <input class="input" name="deadline" value="" type="text">
+        <input class="input" name="deadline" value="{{attributes.deadline}}" type="text">
     </div>
     <label>Priority</label>
     <select class="form-control" name="priority_id">
-        <option title="high" name="priority_id" value="1" id="1">HIGH</option>
-        <option title="medium" name="priority_id" value="2" id="2">MEDIUM</option>
-        <option title="low" name="priority_id" value="3" id="3">LOW</option>
+        <option title="high" name="priority_id" value="{{attributes.priority.title}}" id="1">HIGH</option>
+        <option title="medium" name="priority_id" value="{{attributes.priority.title}}" id="2">MEDIUM</option>
+        <option title="low" name="priority_id" value="{{attributes.priority.title}}" id="3">LOW</option>
     </select>
 
-    <label>Status</label> <br>
-    <label><input type="radio" name="status_id" value="1"/>Not Started</label>
-    <label><input type="radio" name="status_id" value="2"/>In Progress</label>
-    <label><input type="radio" name="status_id" value="3"/>Completed</label>
+<fieldset>
+		<legend>Select a task status: </legend>
+		<label for="1" class="checkbox"><span class="checkbox"></span>Not Started</label>
+		<input type="radio" name="radio-1" id="1" value="{{attributes.status}}" class=".checkbox">
+		<label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
+		<input type="radio" name="radio-1" id="2" value="{{attributes.status}}" class=".checkbox">
+		<label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>
+		<input type="radio" name="radio-1" id="3" value="{{attributes.status}}" class=".checkbox">
+	</fieldset>
     <br>
     <br>
     <div class="form-group">

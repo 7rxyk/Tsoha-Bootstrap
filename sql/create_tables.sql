@@ -27,10 +27,9 @@ CREATE TABLE task(
   id SERIAL  	PRIMARY KEY,
   person_id 	INTEGER REFERENCES person(id), -- Viiteavain person-tauluun
   name 		varchar(50) NOT NULL,
-  done 		boolean DEFAULT FALSE,
   description 	varchar(400),
-  deadline  	DATE,
-  added 	DATE DEFAULT current_timestamp,
+  deadline  	TIMESTAMP,
+  added 	TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0),
   priority_id INTEGER REFERENCES priority (id),
   status_id 	INTEGER REFERENCES task_status (id)
 );

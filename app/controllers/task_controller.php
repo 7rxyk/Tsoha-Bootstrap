@@ -11,21 +11,13 @@ class TaskController extends BaseController {
     public static function newTask() {
         View::make('task/new.html');
     }
-
-    public static function edit($id) {
-        View::make('task/edit.html');
-    }
     
     public static function login() {
         View::make('suunnitelmat/login.html');
     }
-    
-    public static function listTasks() {
-        View::make('suunnitelmat/todo_list.html');
-    }
 
     public static function showTask($id) {
-        Kint::dump(Task::findOne($id));
+        //Kint::dump(Task::findOne($id));
         View::make('/task/taskPage.html', array('task' => Task::findOne($id)));
     }
 
@@ -33,22 +25,57 @@ class TaskController extends BaseController {
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
         // Alustetaan uusi Task-luokan olion käyttäjän syöttämillä arvoilla
-        $task = new Task(array(
+        $attributes = new Task(array(
             'name' => $params['name'],
             'description' => $params['description'],
             'deadline' => $params['deadline'],
             'priority_id' => $params['priority_id'],
             'status_id' => $params['status_id'],
-            'added' => date('Y-m-d H:i:s')
         ));
-        //Kint::dump($params);
 
-        // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
-        $task->save();
-        //Kint::dump($params);
-        //Kint::dump($task);
-        // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-        Redirect::to('/task/' . $task->id, array('message' => 'New task is added to your to do -list!'));
+        $task = new Task($attributes);
+        $errors = $task->errors();
+
+        if(count($errors) == 0){
+            $task->save();
+            Redirect::to('/task/' . $task->id, array('message' => 'New task is added to your to do -list!'));
+            }else{
+                View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
+
     }
 
+    public static function edit($id) {
+        View::make('task/edit.html');
+    }
+
+    public static function update($id){
+        $params = $_POST;
+
+        $attributes = array(
+            'name' => $params['name'],
+            'description' => $params['description'],
+            'deadline' => $params['deadline'],
+            'priority_id' => $params['priority_id'],
+            'status_id' => $params['status_id'],
+        );
+    // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
+        $task = new Task($attributes);
+        $errors = $task->errors();
+
+        if(count($errors) > 0){
+            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        }else{
+            $task->update();
+
+            Redirect::to('/task/' . $task->id, array('message' => 'Task updated succesfully!'));
+        }
+    }
+
+   public static function destroy($id){
+        $task = new Task(array('id' => $id));
+        $task->destroy();
+        Redirect::to('/task', array('message' => 'Task deleted succesfully!'));
+        }
+    }
 }

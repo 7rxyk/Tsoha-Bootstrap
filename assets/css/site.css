@@ -55,12 +55,6 @@ select {
     height: 54px;
 }
 
-input[type=radio],
-input.radio {
-    float: left;
-    margin: 2px 0 0 2px;
-}
-
 button, .button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
@@ -99,6 +93,35 @@ a.button{
     font-size: 16px;
     font-weight: bold;
     padding: 20px;
-    
 }
 
+fieldset {
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+
+checkbox {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+    padding: .4em 1em;
+    display: inline-block;
+    position: relative;
+    line-height: normal;
+    margin-right: .1em;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    user-select: none;
+    overflow: visible;
+    border-radius: 3px;
+}

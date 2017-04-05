@@ -1,14 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
 
+<h1>{{task.name}}</h1>
 <p>
-    <a href="{{base_path}}/task/{{task.id}}/edit" class=".button">Edit</a>
+  <!-- Poistopainike tulee tähän -->
+  {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+  <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Edit task!</a>
 </p>
 
-<h2>Task name: {{task.name}}</h2>
 <ul>
-    <li><strong>Created on:</strong>{{task.added}} </li>
-    <li><strong>Deadline:</strong> {{task.deadline}}</li>
-    <li><strong>Deadline:</strong> </li>
+  <li><strong>Deadline:</strong> {{task.deadline}}</li>
+  <li><strong>Priority:</strong> {{task.priority}}</li>
+  <li><strong>Status:</strong>
+    {% if task.status %}
+      <label class="label label-success">Done!</label>
+    {% else if %}
+      <label class="label label-info">In progress</label>
+    {% else %}
+          <label class="label label-danger">Not Started</label>
+    {% endif %}
+  </li>
+  <li><strong>Added:</strong> {{task.added}}</li>
 </ul>
+
+<p>
+  {{task.description}}
+</p>
 {% endblock %}
