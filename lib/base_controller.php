@@ -3,14 +3,12 @@
   class BaseController{
 
   public static function get_user_logged_in(){
-    // Katsotaan onko user-avain sessiossa
     if(isset($_SESSION['user'])){
       $person_id = $_SESSION['user'];
-      // Pyydetään Person-mallilta käyttäjä session mukaisella id:llä
+
       $person = Person::find($person_id);
       return $person;
     }
-
     return null;
   }
 

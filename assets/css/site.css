@@ -95,6 +95,10 @@ a.button{
     padding: 20px;
 }
 
+a {
+    text-decoration: none;
+}
+
 fieldset {
     display: block;
     -webkit-margin-start: 2px;

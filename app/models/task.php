@@ -2,7 +2,6 @@
 
 class Task extends BaseModel {
 
-    // Attribuutit
     public $id, $name, $description, $deadline, $added, $priority, $status;
 
     public function __construct($attributes) {
@@ -12,15 +11,12 @@ class Task extends BaseModel {
     }
 
     public static function all() {
-        // Alustetaan kysely tietokantayhteydellämme
         $query = DB::connection()->prepare('SELECT * FROM Task');
-        // Suoritetaan kysely
         $query->execute();
-        // Haetaan kyselyn tuottamat rivit
+
         $rows = $query->fetchAll();
         $tasks = array();
 
-        // Käydään kyselyn tuottamat rivit läpi
         foreach ($rows as $row) {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
@@ -57,13 +53,9 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
         $query = DB::connection()->prepare('INSERT INTO Task (name,  description, deadline, priority_id, status_id) VALUES (:name, :description, :deadline, :priority_id, :status_id) RETURNING id');
-        // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
         $query->execute(array('name' => $this->name, 'description' => $this->description, 'deadline' => $this->deadline, 'priority_id' => $this->priority, 'status_id' => $this->status));
-        // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
         $row = $query->fetch();
-        // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
         $this->id = $row['id'];
     }
 
@@ -78,7 +70,6 @@ class Task extends BaseModel {
         return $errors;
     }
 
-    
     public function validate_description() {
         $errors = array();
         if (self::validate_string_length($this->description, 1, 400) === false) {
@@ -86,6 +77,7 @@ class Task extends BaseModel {
         }
         return $errors;
     }
+
     public function validate_deadline() {
         $errors = array();
         $deadline = DateTime::createFromFormat('d-m-Y', $this->deadline);
@@ -97,17 +89,19 @@ class Task extends BaseModel {
         }
         return $errors;
     }
+
     public function validate_priority_id() {
         $errors = array();
         if (self::number($this->priority_id) === false) {
-            $errors[] = 'Choose priority!';
+            $errors[] = 'Choose priority for the task!';
         }
         return $errors;
     }
+
     public function validate_status() {
         $errors = array();
         if (self::number($this->status) === false) {
-            $errors[] = 'Choose taskstatus!';
+            $errors[] = 'Choose current status for the task!';
         }
         return $errors;
     }

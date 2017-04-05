@@ -1,4 +1,5 @@
 <?php
+require 'app/models/person.php';
 class PersonController extends BaseController{
 
   public static function requireLogin() {

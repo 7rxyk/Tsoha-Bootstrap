@@ -3,7 +3,6 @@ require 'app/models/task.php';
 class TaskController extends BaseController {
 
     public static function index() {
-        // Haetaan kaikki pelit tietokannasta
         $tasks = Task::all();
         View::make('task/index.html', array('tasks' => $tasks));
     }
@@ -14,15 +13,13 @@ class TaskController extends BaseController {
     }
 
     public static function showTask($id) {
-        //Kint::dump(Task::findOne($id));
         View::make('/task/taskPage.html', array('task' => Task::findOne($id)));
     }
 
     public static function store() {
         self::check_logged_in();
-        // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
-        // Alustetaan uusi Task-luokan olion käyttäjän syöttämillä arvoilla
+
         $attributes = new Task(array(
             'name' => $params['name'],
             'description' => $params['description'],
@@ -59,7 +56,7 @@ class TaskController extends BaseController {
             'priority_id' => $params['priority_id'],
             'status_id' => $params['status_id'],
         );
-    // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
+
         $task = new Task($attributes);
         $errors = $task->errors();
 

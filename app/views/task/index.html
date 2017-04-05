@@ -11,12 +11,10 @@
             <th>Deadline</th>
             <th>Status</th>
             <th>Priority</th>
-            <th>Category</th>
             <th>Added</th>
             <th></th>
         </tr>
     </thead>
-
 
     <tbody>
         {% for task in tasks %}
@@ -25,18 +23,11 @@
             <td>{{task.deadline}}</td>
             <td>{{task.status_id}}</td>
             <td>{{task.priority_id}}</td>
-            <td>
-                {% if task.done %}
-                <label class="btn-lg-success">Done
-                    {% else %}
-                    <label class="btn-lg-info">In progress
-                        {% endif %}
-                        </td>
-                        <td>{{task.added}}</td>
+            <td>{{task.added}}</td>
                         
-                        <td><a class=".button" href="{{base_path}}/task/{{task.id}}/edit">Edit</a></td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                        </table>
-                        {% endblock %}
+            <td><a class=".button" href="{{base_path}}/task/{{task.id}}/edit">Edit</a></td>
+        </tr>
+     {% endfor %}
+ </tbody>
+ </table>
+  {% endblock %}
