@@ -1,19 +1,29 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
 
 -- Person-taulun testidata
-INSERT INTO person (username, password) VALUES ('Noora', 'noora'); -- Koska id-sarakkeen tietotyyppi on SERIAL, se asetetaan automaattisesti
-INSERT INTO person (username, password) VALUES ('user', 'user');
+INSERT INTO person (username, passsword) VALUES ('Noora', 'noora'); -- Koska id-sarakkeen tietotyyppi on SERIAL, se asetetaan automaattisesti
+INSERT INTO person (username, passsword) VALUES ('user', 'user');
 
--- Task taulun testidata
-INSERT INTO task (taskname, person_id, description, deadline, added, status, priority_v) VALUES ('Do the dishes', '2', 'Use the ECO washprogram to save water!', '2017-04-24', NOW(), 'In Progress', 'Low');
+
+-- category taulun testidata
+INSERT INTO category (category_name) VALUES ('Home');
+INSERT INTO category (category_name) VALUES ('Work');
+
 
 -- priority taulun testidata
-INSERT INTO priority (title, vlue) VALUES ('High', '1');
-INSERT INTO priority (title, vlue) VALUES ('Medium', '2');
-INSERT INTO priority (title, vlue) VALUES ('Low', '3');
+INSERT INTO priority (priority_name, priority_class) VALUES ('High', '1');
+INSERT INTO priority (priority_name, priority_class) VALUES ('Medium', '2');
+INSERT INTO priority (priority_name, priority_class) VALUES ('Low', '3');
 
 
 -- task_status taulun testidata
-INSERT INTO task_status (title, numb) VALUES ('Not Started', '1');
-INSERT INTO task_status (title, numb) VALUES ('In Progress', '2');
-INSERT INTO task_status (title, numb) VALUES ('Completed', '3');
+INSERT INTO task_status (status_name, current_status) VALUES ('Not Started', '1');
+INSERT INTO task_status (status_name, current_status) VALUES ('In Progress', '2');
+INSERT INTO task_status (status_name, current_status) VALUES ('Completed', '3');
+
+-- Task taulun testidata
+INSERT INTO task (taskname, person_id, info, deadline, status_id, priority_id) VALUES ('Do the dishes', '2', 'Use the ECO washprogram to save water!', '2017-04-28', '2', '3');
+
+-- task_category taulun testidata
+INSERT INTO task_category (task_id, category_id) VALUES (1, 1);
+INSERT INTO task_category (task_id, category_id) VALUES (1, 2);
