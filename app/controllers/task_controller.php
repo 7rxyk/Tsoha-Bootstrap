@@ -38,10 +38,10 @@ class TaskController extends BaseController {
 
         $attributes = new Task(array(
             'taskname' => $params['name'],
-            'description' => $params['description'],
+            'info' => $params['info'],
             'deadline' => $params['deadline'],
-            'priority_v' => $params['priority_v'],
-            'status' => $params['status'],
+            'priority_id' => $params['priority_id'],
+            'status_id' => $params['status_id'],
         ));
 
         $task = new Task($attributes);
@@ -66,10 +66,10 @@ class TaskController extends BaseController {
 
         $attributes = array(
             'taskname' => $params['taskname'],
-            'description' => $params['description'],
+            'info' => $params['info'],
             'deadline' => $params['deadline'],
-            'priority_v' => $params['priority_v'],
-            'status' => $params['status'],
+            'priority_id' => $params['priority_id'],
+            'status_id' => $params['status_id'],
         );
 
         $task = new Task($attributes);
@@ -80,7 +80,7 @@ class TaskController extends BaseController {
         } else {
             $task->update();
 
-            Redirect::to('/task/' . $task->id, array('message' => 'Task updated succesfully!'));
+            Redirect::to('/task/list.html' . $task->id, array('message' => 'Task updated succesfully!'));
         }
     }
 
@@ -88,7 +88,7 @@ class TaskController extends BaseController {
         self::check_logged_in();
         $task = new Task(array('id' => $id));
         $task->destroy();
-        Redirect::to('/task', array('message' => 'Task deleted succesfully!'));
+        Redirect::to('/task/list.html', array('message' => 'Task deleted succesfully!'));
     }
 
 }

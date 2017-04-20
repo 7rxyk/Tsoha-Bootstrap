@@ -2,12 +2,12 @@
 
 class Task extends BaseModel {
 
-    public $id, $taskname, $description, $deadline, $added, $priority_v, $status;
+    public $id, $taskname, $info, $deadline, $priority_id, $status_id, $added;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_description', 'validate_deadline', 'validate_priority_v',
-            'validate_status');
+        $this->validators = array('validate_name', 'validate_info', 'validate_deadline', 'validate_priority_id',
+            'validate_status_id');
     }
     
     public static function all() {
@@ -21,11 +21,11 @@ class Task extends BaseModel {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
                 'taskname' => $row['taskname'],
-                'description' => $row['description'],
+                'info' => $row['info'],
                 'deadline' => $row['deadline'],
                 'added' => $row['added'],
-                'priority_v' => $row['priority_v'],
-                'status' => $row['status']
+                'priority_id' => $row['priority_id'],
+                'status_id' => $row['status_id']
             ));
         }
 
@@ -43,11 +43,11 @@ class Task extends BaseModel {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
                 'taskname' => $row['taskname'],
-                'description' => $row['description'],
+                'info' => $row['info'],
                 'deadline' => $row['deadline'],
                 'added' => $row['added'],
-                'priority_v' => $row['priority_v'],
-                'status' => $row['status']
+                'priority_id' => $row['priority_id'],
+                'status_id' => $row['status_id']
             ));
         }
 
@@ -63,11 +63,11 @@ class Task extends BaseModel {
             $task = new Task(array(
                 'id' => $row['id'],
                 'taskname' => $row['taskname'],
-                'description' => $row['description'],
+                'info' => $row['info'],
                 'deadline' => $row['deadline'],
                 'added' => $row['added'],
-                'priority_v' => $row['priority_v'],
-                'status' => $row['status']
+                'priority_id' => $row['priority_id'],
+                'status_id' => $row['status_id']
             ));
             return $task;
         }
@@ -75,8 +75,8 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  description, deadline, priority_v, status) VALUES (:taskname, :description, :deadline, :priority_v, :status) RETURNING id');
-        $query->execute(array('taskname' => $this->taskname, 'description' => $this->description, 'deadline' => $this->deadline, 'priority_v' => $this->priority_v, 'status' => $this->status));
+        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  info, deadline, priority_id, status_id) VALUES (:taskname, :info, :deadline, :priority_id, :status_id) RETURNING id');
+        $query->execute(array('taskname' => $this->taskname, 'info' => $this->info, 'deadline' => $this->deadline, 'priority_id' => $this->priority_id, 'status_id' => $this->status_id));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
@@ -112,7 +112,7 @@ class Task extends BaseModel {
         return $errors;
     }
 
-    public function validate_priority_v() {
+    public function validate_priority_id() {
         $errors = array();
         if (self::number($this->priority_v) === false) {
             $errors[] = 'Choose priority for the task!';
@@ -120,7 +120,7 @@ class Task extends BaseModel {
         return $errors;
     }
 
-    public function validate_status() {
+    public function validate_status_id() {
         $errors = array();
         if (self::number($this->status) === false) {
             $errors[] = 'Choose current status for the task!';
