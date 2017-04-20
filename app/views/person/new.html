@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Register to the Todo app</h1>
+
+<form action="{{base_path}}/register" method="POST">
+    <div class="form-group">
+        <input class="form-control" placeholder="USERNAME" required name="username" {% if username %} value="{{username}}" {% endif %} type="text">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" placeholder="PASSWORD" required name="password" type="password">
+    </div>
+
+    <button type="submit" >Create a new user</button>
+</form>
+{% endblock %}

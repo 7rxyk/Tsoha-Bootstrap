@@ -35,14 +35,19 @@ class TaskController extends BaseController {
     public static function store() {
         self::check_logged_in();
         $params = $_POST;
+        
+        $category = $params['category'];
+        $priority_id = $params['priority_id'];
+        $status_id = $params['status_id'];
 
-        $attributes = new Task(array(
-            'taskname' => $params['name'],
+        $attributes = array(
+            'taskname' => $params['taskname'],
             'info' => $params['info'],
             'deadline' => $params['deadline'],
-            'priority_id' => $params['priority_id'],
-            'status_id' => $params['status_id'],
-        ));
+            'category' => $category,
+            'priority_id' => $priority_id,
+            'status_id' => $status_id
+        );
 
         $task = new Task($attributes);
         $errors = $task->errors();
@@ -64,12 +69,17 @@ class TaskController extends BaseController {
         self::check_logged_in();
         $params = $_POST;
 
+        $category = $params['category'];
+        $priority_id = $params['priority_id'];
+        $status_id = $params['status_id'];
+
         $attributes = array(
             'taskname' => $params['taskname'],
             'info' => $params['info'],
             'deadline' => $params['deadline'],
-            'priority_id' => $params['priority_id'],
-            'status_id' => $params['status_id'],
+            'category' => $category,
+            'priority_id' => $priority_id,
+            'status_id' => $status_id
         );
 
         $task = new Task($attributes);
