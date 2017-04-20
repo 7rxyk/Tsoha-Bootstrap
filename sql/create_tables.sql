@@ -4,10 +4,10 @@ CREATE TABLE person(
   id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
   username varchar(50) NOT NULL UNIQUE, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
   passsword varchar(50) NOT NULL,
-  created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (0)
+  created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(0)
 );
 
-CREATE TABLE priority(
+CREATE TABLE task_priority(
   id SERIAL PRIMARY KEY,
   priority_name  VARCHAR(20) NOT NULL UNIQUE,
   priority_class INTEGER NOT NULL UNIQUE
@@ -31,7 +31,7 @@ CREATE TABLE task(
   info        varchar(400),
   deadline    TIMESTAMP,
   added       TIMESTAMP DEFAULT CURRENT_TIMESTAMP (0),
-  priority_id varchar REFERENCES priority (id),
+  priority_id varchar REFERENCES task_priority (id),
   status_id	  varchar REFERENCES task_status (id),
 );
 
