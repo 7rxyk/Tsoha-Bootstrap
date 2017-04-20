@@ -2,11 +2,11 @@
 
 class Task extends BaseModel {
 
-    public $id, $taskname, $description, $deadline, $added, $priority, $status;
+    public $id, $taskname, $description, $deadline, $added, $priority_v, $status;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_description', 'validate_deadline', 'validate_priority',
+        $this->validators = array('validate_name', 'validate_description', 'validate_deadline', 'validate_priority_v',
             'validate_status');
     }
     
@@ -32,7 +32,7 @@ class Task extends BaseModel {
         return $tasks;
     }
 
-    public static function findPerUser($id) {
+    public static function findUser($id) {
         $query = DB::connection()->prepare('SELECT * FROM Task WHERE person_id = :id');
         $query->execute(array('id' => $id));
 
@@ -75,8 +75,8 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  description, deadline, priority_v, status) VALUES (:taskname, :description, :deadline, :priority, :status) RETURNING id');
-        $query->execute(array('taskname' => $this->taskname, 'description' => $this->description, 'deadline' => $this->deadline, 'priority_v' => $this->priority, 'status' => $this->status));
+        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  description, deadline, priority_v, status) VALUES (:taskname, :description, :deadline, :priority_v, :status) RETURNING id');
+        $query->execute(array('taskname' => $this->taskname, 'description' => $this->description, 'deadline' => $this->deadline, 'priority_v' => $this->priority_v, 'status' => $this->status));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
@@ -102,19 +102,19 @@ class Task extends BaseModel {
 
     public function validate_deadline() {
         $errors = array();
-        $deadline = DateTime::createFromFormat('d-m-Y', $this->deadline);
-        $dateNow = DateTime::createFromFormat('d-m-Y', date('d-m-Y'));
+        $deadline = DateTime::createFromFormat('Y-m-d', $this->deadline);
+        $dateNow = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
         if ($deadline === false) {
-            $errors[] = 'Deadline is invalid. Use format: Day-Month-Year';
+            $errors[] = 'Deadline is invalid. Use format: Year-month-day';
         } else if ($deadline < $dateNow) {
             $errors[] = 'Deadline is invalid. It can\'t point to a past date.';
         }
         return $errors;
     }
 
-    public function validate_priority() {
+    public function validate_priority_v() {
         $errors = array();
-        if (self::number($this->priority) === false) {
+        if (self::number($this->priority_v) === false) {
             $errors[] = 'Choose priority for the task!';
         }
         return $errors;
@@ -127,9 +127,4 @@ class Task extends BaseModel {
         }
         return $errors;
     }
-    
-    public function errors() {
-        return array();
-    }
-
 }

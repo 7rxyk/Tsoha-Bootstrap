@@ -15,7 +15,7 @@ class BaseModel {
     public function errors() {
         $errors = array();
         foreach ($this->validators as $validator) {
-            $errors += $this->{$validator}();
+            $errors = $this->{$validator}();
         }
         return $errors;
     }

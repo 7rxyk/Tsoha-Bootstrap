@@ -6,7 +6,7 @@ CREATE TABLE person(
   password 	varchar(50) NOT NULL
 );
 
-CREATE TABLE priority(
+CREATE TABLE priority_v(
   id            SERIAL PRIMARY KEY,
   title 	VARCHAR(20) NOT NULL UNIQUE,
 );
@@ -28,8 +28,8 @@ CREATE TABLE task(
   description 	varchar(400),
   deadline  	TIMESTAMP,
   added 	TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0),
-  priority_v    varchar REFERENCES priority (title),
-  status 	varchar REFERENCES task_status (title)
+  priority_v    varchar REFERENCES priority(id),
+  status 	varchar REFERENCES task_status(title)
 );
 
 --CREATE TABLE task_category(
