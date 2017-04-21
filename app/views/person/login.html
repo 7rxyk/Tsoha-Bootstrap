@@ -3,10 +3,11 @@
 <h1>Log in to the Todo app</h1>
 
 {% if error %}
-        {% for e in error %}
-          <li>{{e}}</li>
-        {% endfor %}
+{% for e in error %}
+<li>{{e}}</li>
+{% endfor %}
 {% endif %}
+
 <form method="post" action="{{base_path}}/login">
     <div class="form-group">
         <input required name="username" class="input" type="text" placeholder="USERNAME" value="{{username}}">
@@ -16,7 +17,7 @@
     </div>
 
     <button type="submit">Log in</button>
-
-     <p class="message">Not yet registered? <a href="{{base_path}}/register">Create an account</a></p>
+    <br>
+    <p>Not yet registered? <a href="{{base_path}}/register">Create an account</a></p>
 </form>
 {% endblock %}

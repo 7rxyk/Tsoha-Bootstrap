@@ -10,8 +10,9 @@ echo "Siirretään tiedostot users-palvelimelle..."
 # Tämä komento siirtää tiedostot palvelimelta
 rsync -z -r $DIR/app $DIR/assets $DIR/config $DIR/lib $DIR/sql $DIR/vendor $DIR/index.php $DIR/composer.json $USERNAME@users.cs.helsinki.fi:htdocs/$PROJECT_FOLDER
 
-# bash create_tables.sh
-# bash add_test_data.sh
+#bash drop_tables.sh
+#bash create_tables.sh
+#bash add_test_data.sh
 echo "Valmis!"
 
 echo "Suoritetaan komento php composer.phar dump-autoload..."

@@ -1,5 +1,7 @@
 <?php
 
+require 'app/models/category.php';
+
 class CategoryController extends BaseController {
 
     public static function all() {
@@ -30,7 +32,7 @@ class CategoryController extends BaseController {
         $updatedCategory = new Category($attributes);
         $errors = $updatedCategory->errors();
         if (count($errors) > 0) {
-            View::make('category/edit.html', array('errors' => $errors, 'category' => $category));
+            View::make('/category/edit.html', array('errors' => $errors, 'category' => $category));
         } else {
             $updatedCategory->update();
             Redirect::to('/category/all', array('message' => 'Category has been updated!'));
@@ -59,4 +61,5 @@ class CategoryController extends BaseController {
         $category->destroy();
         Redirect::to('/category/all', array('message' => 'Category has been deleted!'));
     }
+
 }

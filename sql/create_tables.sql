@@ -32,7 +32,7 @@ CREATE TABLE task(
   deadline    DATE,
   added       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   priority_id INTEGER REFERENCES task_priority (id),
-  status_id	  INTEGER REFERENCES task_status (id)
+  status_id   INTEGER REFERENCES task_status (id)
 );
 
 CREATE TABLE task_category(

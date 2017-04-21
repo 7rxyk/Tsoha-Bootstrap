@@ -4,54 +4,53 @@ require 'app/models/person.php';
 
 class PersonController extends BaseController {
 
-
     public static function login() {
-        self::check_logged_in();
-        View::make('person/login');
+        self::not_logged();
+        View::make('/person/login.html');
     }
 
     public static function handle_login() {
-        self::check_logged_in();
+        self::not_logged();
         $params = $_POST;
         $person = Person::authenticate($params['username'], $params['passsword']);
 
         if (!$person) {
-            View::make('person/login', array('error' => 'Wrong username or password!', 'username' => $params['username']));
+            View::make('/person/login.html', array('error' => 'Wrong username or password!', 'username' => $params['username']));
         } else {
             $_SESSION['person'] = $person->id;
-          
-            Redirect::to("/task/list");
+            Redirect::to('/list');
         }
     }
 
-        public static function registeringNeeded() {
-        self::check_logged_in();
+    public static function registeringNeeded() {
+        self::not_logged();
         View::make('/person/new.html');
     }
 
-    public static function register()  {
+    public static function register() {
+        self::not_logged();
         $params = $_POST;
         $person = new person(array(
             'username' => $params['username'],
             'passsword' => $params['passsword'],
         ));
         $errors = $person->errors();
-        if (person::findByName($person->username) != null) {
+        if (person::findByUsername($person->username) != null) {
             $errors += array('Username already exists.');
         }
         if (count($errors) > 0) {
             View::make('/person/new.html', array('errors' => $errors, 'username' => $person->username));
         } else {
             $person->save();
-            Redirect::to('/task/list.html', array('message' => 'User has been successfully created!'));
+            Redirect::to('/list', array('message' => 'User has been successfully created!'));
         }
     }
 
     public static function logout() {
         $_SESSION['person'] = null;
-        Redirect::to('/', array('message' => 'You are logged out!'));
+        Redirect::to('/login', array('message' => 'You are logged out!'));
     }
-    
+
     public static function find($id) {
         return Person::find($id);
     }

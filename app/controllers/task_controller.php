@@ -4,41 +4,41 @@ require 'app/models/task.php';
 
 class TaskController extends BaseController {
 
-  public static function index(){
-    self::check_login();
-    $user_logged_in = self::get_user_logged_in();
-    $params = $_GET;
-    $options = array('person_id' => $user_logged_in->id);
+    public static function findWithSearch() {
+        self::check_logged_in();
+        $user_logged_in = self::get_user_logged_in();
+        $params = $_GET;
+        $options = array('person_id' => $user_logged_in->id);
 
-    if(isset($params['search'])){
-      $options['search'] = $params['search'];
+        if (isset($params['search'])) {
+            $options['search'] = $params['search'];
+        }
+
+        $tasks = Task::allWithOption($options);
+
+        View::make('/task/list.html', array('tasks' => $tasks));
     }
-
-    $tasks = Task::all($options);
-
-    View::make('task/list.html', array('tasks' => $tasks));
-  }
 
     public static function newTask() {
         self::check_logged_in();
         View::make('/task/new.html');
     }
-    
-    public static function userTask() {
+
+    public static function userTasks() {
         self::check_logged_in();
-        
-        $user = $_SESSION["person"];
-        $tasks = Task::findUser($user);
-        View::make("/task/list.html", array("tasks" => $tasks));
+
+        $person = $_SESSION['person'];
+        $tasks = Task::findUser($person);
+        View::make('/task/list.html', array('tasks' => $tasks));
     }
-    
+
     public static function userTaskOnLogin() {
         self::check_logged_in();
         View::make('/task/list.html', array('message' => 'Welcome back ' . $person->username . '!'));
     }
 
-    public static function oneTask($id) {
-        View::make('/task/taskPage.html', array('task' => Task::findOne($id)));
+    public static function findTask($id) {
+        View::make('/task/taskPage.html', array('task' => Task::findTask($id)));
     }
 
     public static function createNewTask() {
@@ -63,15 +63,15 @@ class TaskController extends BaseController {
 
         if (count($errors) == 0) {
             $task->save();
-            Redirect::to('/task/list.html' . $task->id, array('message' => 'New task is added to your to do -list!'));
+            Redirect::to('/list' . $task->id, array('message' => 'New task is added to your to do -list!'));
         } else {
-            View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('/task/new.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
     public static function edit($id) {
         self::check_logged_in();
-        View::make('task/edit.html');
+        View::make('/task/edit.html');
     }
 
     public static function update($id) {
@@ -95,11 +95,11 @@ class TaskController extends BaseController {
         $errors = $task->errors();
 
         if (count($errors) > 0) {
-            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('/task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $task->update();
 
-            Redirect::to('/task/list.html' . $task->id, array('message' => 'Task updated succesfully!'));
+            Redirect::to('/list' . $task->id, array('message' => 'Task updated succesfully!'));
         }
     }
 
@@ -107,7 +107,7 @@ class TaskController extends BaseController {
         self::check_logged_in();
         $task = new Task(array('id' => $id));
         $task->destroy();
-        Redirect::to('/task/list.html', array('message' => 'Task deleted succesfully!'));
+        Redirect::to('/list', array('message' => 'Task deleted succesfully!'));
     }
 
 }

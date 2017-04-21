@@ -8,18 +8,14 @@ $routes->get('/', function() {
 /*
 $routes->post('/', function() {
     PersonController::handle_login();
-});
+});*/
 
 $routes->get('/login', function() {
     PersonController::login();
-});*/
+});
 
 $routes->post('/login', function() {
     PersonController::handle_login();
-});
-
-$routes->post('/logout', function () {
-    PersonController::logout();
 });
 
 $routes->get('/register', function () {
@@ -29,15 +25,19 @@ $routes->post('/register', function () {
     PersonController::register();
 });
 
+$routes->get('/logout', function () {
+    PersonController::logout();
+});
+
 //task routes
 
-$routes->get('/task/list', function() {
-    TaskController::userTask();
+$routes->get('/list', function() {
+    TaskController::userTasks();
 });
-
-$routes->get('/task/list', function() {
-    TaskController::userTaskOnLogin();
-});
+/*
+$routes->get('/list', function() {
+    TaskController::findWithSearch();
+});*/
 
 $routes->get('/task/new', function() {
     TaskController::newTask();
@@ -48,7 +48,7 @@ $routes->post('/task/new', function() {
 });
 
 $routes->get('/task/:id', function($id) {
-    TaskController::oneTask($id);
+    TaskController::findTask($id);
 });
 
 $routes->get('/task/:id/edit', function ($id) {

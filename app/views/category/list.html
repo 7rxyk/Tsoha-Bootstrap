@@ -9,21 +9,21 @@
 {% if categories|length > 0 %}
 <table class="table table-striped table-bordered">
     <thead>
-    <tr>
-        <th>Category</th>
-    </tr>
+        <tr>
+            <th>Category</th>
+        </tr>
     </thead>
 
     <tbody>
-    {% for category in categories %}
-    <tr>
-        <td>{{category.category_name}}</td>
-        <th>
-            {{buttons.destroy_button("#{base_path}/category/#{category.id}/delete")}}
-            <a href="{{base_path}}/category/{{category.id}}/edit" class="button" >Edit</a>
-        </th>
-    </tr>
-    {% endfor %}
+        {% for category in categories %}
+        <tr>
+            <td>{{category.category_name}}</td>
+            <th>
+                {{buttons.destroy_button("#{base_path}/category/#{category.id}/delete")}}
+                <a href="{{base_path}}/category/{{category.id}}/edit" class="button" >Edit</a>
+            </th>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% else %}

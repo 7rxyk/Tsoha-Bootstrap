@@ -1,16 +1,17 @@
 <?php
+
 class Category extends BaseModel {
 
     public $id, $category_name, $person_id;
-    
+
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_category_name');
     }
 
-    public static function findAll(){
-        $query = DB::connection()->prepare('SELECT * FROM category');
-        $query->execute();
+    public static function findAllByUser($person_id) {
+        $query = DB::connection()->prepare('SELECT * FROM category WHERE person_id = :person_id');
+        $query->execute(array('person_id' => $person_id));
         $rows = $query->fetchAll();
         $categories = array();
         foreach ($rows as $row) {
@@ -23,7 +24,7 @@ class Category extends BaseModel {
         return $categories;
     }
 
-    public static function findAllByTask($task_id)  {
+    public static function findAllByTask($task_id) {
         $query = DB::connection()->prepare('SELECT category.* FROM category JOIN task_category ON task_category.category_id = category.id WHERE task_category.task_id = :id');
         $query->execute(array('id' => $task_id));
         $rows = $query->fetchAll();
@@ -53,7 +54,7 @@ class Category extends BaseModel {
         return null;
     }
 
-    public function save(){
+    public function save() {
         $query = DB::connection()->prepare('INSERT INTO category(category_name, person_id) VALUES (:category_name, :person_id) RETURNING id');
         $query->execute(array('category_name' => $this->category_name, 'person_id' => $this->person_id));
         $row = $query->fetch();
@@ -72,11 +73,12 @@ class Category extends BaseModel {
         $query->execute(array('id' => $this->id, 'category_name' => $this->category_name, 'person_id' => $this->person_id));
     }
 
-    public function validate_category_name(){
+    public function validate_category_name() {
         $errors = array();
         if (self::validate_string_length($this->category_name, 3, 20) == false) {
             $errors[] = 'Categorynames\'s length is invalid. It must be 3 - 20 characters (was ' . strlen($this->category_name) . ').';
         }
         return $errors;
     }
+
 }

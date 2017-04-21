@@ -13,14 +13,16 @@
     <li><strong>Priority:</strong> {{task.priority_id}}</li>
     <li><strong>Category:</strong> {{task.category_name}}</li>
     <li><strong>Status:</strong> {{task.status_id}}</li>
+</ul>
 
-    {% if {{task.status_id}} == 3 %}
-      <label class="label label-success">Done!</label>
-      {% else if {{task.status_id}} == 2 %}
-      <label class="label label-warning">In progress!</label>
-    {% else %}
-      <label class="label label-danger">Not Started!</label>
-    {% endif %}
+{% if {{task.status_id}} == 3 %}
+<label class="label label-success">Done!</label>
+{% else if {{task.status_id}} == 2 %}
+<label class="label label-warning">In progress!</label>
+{% else %}
+<label class="label label-danger">Not Started!</label>
+{% endif %}
+<ul>
     <li><strong>Added:</strong> {{task.added}}</li>
 </ul>
 

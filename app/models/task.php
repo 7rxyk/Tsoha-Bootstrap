@@ -10,29 +10,29 @@ class Task extends BaseModel {
             'validate_status_id');
     }
 
-    public static function all($options){
-    $query_string = 'SELECT * FROM Task WHERE person_id = :person_id';
-    $options = array('person_id' => $options['person_id']);
-    if(isset($options['search'])){
-      $query_string .= ' AND name LIKE :like';
-      $options['like'] = '%' . $options['search'] . '%';
+    public static function allWithOption($options) {
+        $query_string = 'SELECT * FROM task WHERE person_id = :person_id';
+        $options = array('person_id' => $options['person_id']);
+        if (isset($options['search'])) {
+            $query_string .= ' AND name LIKE :like';
+            $options['like'] = '%' . $options['search'] . '%';
+        }
+
+        $query = DB::connection()->prepare($query_string);
+        $query->execute($options);
+
+        $rows = $query->fetchAll();
+        $tasks = array();
+
+        foreach ($rows as $row) {
+            $tasks[] = new Task($row);
+        }
+
+        return $tasks;
     }
 
-    $query = DB::connection()->prepare($query_string);
-    $query->execute($options);
-
-    $rows = $query->fetchAll();
-    $tasks = array();
-
-    foreach($rows as $row){
-      $tasks[] = new Task($row);
-    }
-
-    return $tasks;
-  }
-    
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Task');
+        $query = DB::connection()->prepare('SELECT * FROM task');
         $query->execute();
 
         $rows = $query->fetchAll();
@@ -49,12 +49,11 @@ class Task extends BaseModel {
                 'status_id' => $row['status_id']
             ));
         }
-
         return $tasks;
     }
 
     public static function findUser($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Task WHERE person_id = :id');
+        $query = DB::connection()->prepare('SELECT * FROM task WHERE person_id = :id');
         $query->execute(array('id' => $id));
 
         $rows = $query->fetchAll();
@@ -75,8 +74,8 @@ class Task extends BaseModel {
         return $tasks;
     }
 
-    public static function findOne($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Task WHERE id = :id LIMIT 1');
+    public static function findTask($id) {
+        $query = DB::connection()->prepare('SELECT * FROM task WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
@@ -88,7 +87,8 @@ class Task extends BaseModel {
                 'deadline' => $row['deadline'],
                 'added' => $row['added'],
                 'priority_id' => $row['priority_id'],
-                'status_id' => $row['status_id']
+                'status_id' => $row['status_id'],
+                'person_id' => $row['person_id']
             ));
             return $task;
         }
@@ -115,7 +115,7 @@ class Task extends BaseModel {
 
     public function validate_info() {
         $errors = array();
-        if (self::validate_string_length($this->info, 1, 400) === false) {
+        if (self::validate_length($this->info, 1, 400) === false) {
             $errors[] = 'Description can\'t be empty';
         }
         return $errors;
@@ -135,7 +135,7 @@ class Task extends BaseModel {
 
     public function validate_priority_id() {
         $errors = array();
-        if (self::number($this->priority_v) === false) {
+        if (self::number($this->priority_id) === false) {
             $errors[] = 'Choose priority for the task!';
         }
         return $errors;
@@ -143,9 +143,10 @@ class Task extends BaseModel {
 
     public function validate_status_id() {
         $errors = array();
-        if (self::number($this->status) === false) {
+        if (self::number($this->status_id) === false) {
             $errors[] = 'Choose current status for the task!';
         }
         return $errors;
     }
+
 }

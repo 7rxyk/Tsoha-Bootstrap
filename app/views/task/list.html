@@ -2,15 +2,22 @@
 {% block content %}
 <h1>To do -list</h1>
 
-<a href="{{base_path}}/task/new" class="button">Add new task!</a>
+{% if user_logged_in %}
+<h2> {{user_logged_in.username}} Todo list</h2>
+{% endif %}
 
-  <form method="get" action="" class="form-inline">
+<br>
+
+<br><a href="{{base_path}}/task/new" class="button">Add new task!</a><br>
+<br>
+
+<form method="get" action="" class="form-inline">
     <div class="form group">
-      <input type="text" name="search" class="form-control" placeholder="Search for...">
+        <input type="text" name="search" class="form-control" placeholder="Search for...">
     </div>
 
     <button type="submit" >Search!</button>
-  </form>
+</form>
 
 <br>
 

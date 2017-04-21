@@ -14,13 +14,13 @@
         <input type="text" name="deadline" placeholder="YYYY-MM-DD" value="{{task.deadline}}"/>
 
         <div class="form-group">
-  <label>Category</label>
-  <select class="form-control" name="category">
-    {% for category in categories %}
-      <option value="{{category.id}}">{{category.category_name}}</option>
-    {% endfor %}
-  </select>
-</div>
+            <label>Category</label>
+            <select class="form-control" name="category">
+                {% for category in categories %}
+                <option value="{{category.id}}">{{category.category_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
 
     </div>
     <label>Priority</label>
