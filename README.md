@@ -5,12 +5,11 @@ Linkit:
 * [Todo-list sovellus](https://nooramar.users.cs.helsinki.fi/tsoha)
 * [Dokumentaatio](https://github.com/7rxyk/Tsoha-Bootstrap/blob/master/doc/Dokumentaatio.pdf)
 
-Suunnitelma sivuja:
+Tunnuksia sivulle on user / user ja Noora/noora
 
-* [Log in](https://nooramar.users.cs.helsinki.fi/tsoha/login)
-* [Tehtävät](https://nooramar.users.cs.helsinki.fi/tsoha/)
-* [Tehtävän muokkaus](http://nooramar.users.cs.helsinki.fi/tsoha/task/1/edit)
-* [Tehtävän lisäys](http://nooramar.users.cs.helsinki.fi/tsoha/task/new)
+Uusienkin pitäisi onnistua, mutta sisäänkirjautuminen ei nyt onnistu, kun BaseControlleri ei löydä Person luokkaa :( 
+Uudet tunnukset näkee 
+* [Tietokantayhteys taulut](https://nooramar.users.cs.helsinki.fi/tsoha/tietokantayhteys)
 
 
 ## Työn aihe
