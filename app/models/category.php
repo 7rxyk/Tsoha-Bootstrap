@@ -1,7 +1,7 @@
 <?php
 class Category extends BaseModel {
 
-    public $id, $category_name;
+    public $id, $category_name, $person_id;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -17,13 +17,14 @@ class Category extends BaseModel {
             $categories[] = new Category(array(
                 'id' => $row['id'],
                 'category_name' => $row['category_name'],
+                'person_id' => $row['person_id']
             ));
         }
         return $categories;
     }
 
-    public static function findAllByTask($item_id)  {
-        $query = DB::connection()->prepare('SELECT category.* FROM category JOIN item_category ON item_category.category_id = category.id WHERE item_category.item_id = :id');
+    public static function findAllByTask($task_id)  {
+        $query = DB::connection()->prepare('SELECT category.* FROM category JOIN task_category ON task_category.category_id = category.id WHERE task_category.task_id = :id');
         $query->execute(array('id' => $task_id));
         $rows = $query->fetchAll();
         $categories = array();
@@ -31,6 +32,7 @@ class Category extends BaseModel {
             $categories[] = new Category(array(
                 'id' => $row['id'],
                 'category_name' => $row['category_name'],
+                'person_id' => $row['person_id']
             ));
         }
         return $categories;
@@ -44,6 +46,7 @@ class Category extends BaseModel {
             $category = new Category(array(
                 'id' => $row['id'],
                 'category_name' => $row['category_name'],
+                'person_id' => $row['person_id']
             ));
             return $category;
         }
@@ -51,8 +54,8 @@ class Category extends BaseModel {
     }
 
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO category(category_name) VALUES (:category_name) RETURNING id');
-        $query->execute(array('category_name' => $this->category_name));
+        $query = DB::connection()->prepare('INSERT INTO category(category_name, person_id) VALUES (:category_name, :person_id) RETURNING id');
+        $query->execute(array('category_name' => $this->category_name, 'person_id' => $this->person_id));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
@@ -65,14 +68,14 @@ class Category extends BaseModel {
     }
 
     public function update() {
-        $query = DB::connection()->prepare('UPDATE category SET id = :id, category_name = :category_name WHERE id = :id');
-        $query->execute(array('id' => $this->id, 'category_name' => $this->category_name, 'owner_id' => $this->owner_id));
+        $query = DB::connection()->prepare('UPDATE category SET id = :id, category_name = :category_name, person_id = :person_id WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'category_name' => $this->category_name, 'person_id' => $this->person_id));
     }
 
     public function validate_category_name(){
         $errors = array();
-        if (self::validate_string_length($this->category_name, 4, 20) == false) {
-            $errors[] = 'Category\'s length is invalid. It must be 4 - 20 characters (was ' . strlen($this->category_name) . ').';
+        if (self::validate_string_length($this->category_name, 3, 20) == false) {
+            $errors[] = 'Categorynames\'s length is invalid. It must be 3 - 20 characters (was ' . strlen($this->category_name) . ').';
         }
         return $errors;
     }

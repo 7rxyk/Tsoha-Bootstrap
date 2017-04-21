@@ -2,7 +2,7 @@
 {% block content %}
 
 <p>
-    <a href="{{base_path}}/category/new" >Add a new category</a>
+    <a href="{{base_path}}/category/new" class = "button" >Add a new category</a>
 </p>
 
 <h1 class="list-group-item">Categories</h1>
@@ -20,7 +20,7 @@
         <td>{{category.category_name}}</td>
         <th>
             {{buttons.destroy_button("#{base_path}/category/#{category.id}/delete")}}
-            <a href="{{base_path}}/category/{{category.id}}/edit" class="btn btn-info">Edit</a>
+            <a href="{{base_path}}/category/{{category.id}}/edit" class="button" >Edit</a>
         </th>
     </tr>
     {% endfor %}

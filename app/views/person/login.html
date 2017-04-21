@@ -12,9 +12,11 @@
         <input required name="username" class="input" type="text" placeholder="USERNAME" value="{{username}}">
     </div>
     <div class="form-group">
-        <input required name="password" class="input" type="password" placeholder="PASSWORD">
+        <input required name="passsword" class="input" type="password" placeholder="PASSWORD">
     </div>
 
     <button type="submit">Log in</button>
+
+     <p class="message">Not yet registered? <a href="{{base_path}}/register">Create an account</a></p>
 </form>
 {% endblock %}

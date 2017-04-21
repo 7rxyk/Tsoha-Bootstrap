@@ -1,20 +1,22 @@
 <?php
 
+require 'app/models/person.php';
+
 class PersonController extends BaseController {
 
 
     public static function login() {
         self::check_logged_in();
-        View::make('person/login.html');
+        View::make('person/login');
     }
 
     public static function handle_login() {
         self::check_logged_in();
         $params = $_POST;
-        $person = Person::authenticate($params['username'], $params['password']);
+        $person = Person::authenticate($params['username'], $params['passsword']);
 
         if (!$person) {
-            View::make('person/login.html', array('error' => 'Wrong username or password!', 'username' => $params['username']));
+            View::make('person/login', array('error' => 'Wrong username or password!', 'username' => $params['username']));
         } else {
             $_SESSION['person'] = $person->id;
           
@@ -22,16 +24,16 @@ class PersonController extends BaseController {
         }
     }
 
-        public static function showRegister() {
+        public static function registeringNeeded() {
         self::check_logged_in();
         View::make('/person/new.html');
     }
 
-    public static function doRegister()  {
+    public static function register()  {
         $params = $_POST;
         $person = new person(array(
             'username' => $params['username'],
-            'password' => $params['password'],
+            'passsword' => $params['passsword'],
         ));
         $errors = $person->errors();
         if (person::findByName($person->username) != null) {

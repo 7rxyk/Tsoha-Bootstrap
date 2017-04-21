@@ -4,10 +4,20 @@ require 'app/models/task.php';
 
 class TaskController extends BaseController {
 
-    public static function index() {
-        $tasks = Task::all();
-        View::make('/task/list.html', array('tasks' => $tasks));
+  public static function index(){
+    self::check_login();
+    $user_logged_in = self::get_user_logged_in();
+    $params = $_GET;
+    $options = array('person_id' => $user_logged_in->id);
+
+    if(isset($params['search'])){
+      $options['search'] = $params['search'];
     }
+
+    $tasks = Task::all($options);
+
+    View::make('task/list.html', array('tasks' => $tasks));
+  }
 
     public static function newTask() {
         self::check_logged_in();
@@ -20,7 +30,6 @@ class TaskController extends BaseController {
         $user = $_SESSION["person"];
         $tasks = Task::findUser($user);
         View::make("/task/list.html", array("tasks" => $tasks));
-        
     }
     
     public static function userTaskOnLogin() {
@@ -28,14 +37,14 @@ class TaskController extends BaseController {
         View::make('/task/list.html', array('message' => 'Welcome back ' . $person->username . '!'));
     }
 
-    public static function showTask($id) {
+    public static function oneTask($id) {
         View::make('/task/taskPage.html', array('task' => Task::findOne($id)));
     }
 
-    public static function store() {
+    public static function createNewTask() {
         self::check_logged_in();
         $params = $_POST;
-        
+
         $category = $params['category'];
         $priority_id = $params['priority_id'];
         $status_id = $params['status_id'];
@@ -56,7 +65,7 @@ class TaskController extends BaseController {
             $task->save();
             Redirect::to('/task/list.html' . $task->id, array('message' => 'New task is added to your to do -list!'));
         } else {
-           // View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 

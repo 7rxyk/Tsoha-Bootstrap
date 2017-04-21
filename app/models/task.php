@@ -9,6 +9,27 @@ class Task extends BaseModel {
         $this->validators = array('validate_name', 'validate_info', 'validate_deadline', 'validate_priority_id',
             'validate_status_id');
     }
+
+    public static function all($options){
+    $query_string = 'SELECT * FROM Task WHERE person_id = :person_id';
+    $options = array('person_id' => $options['person_id']);
+    if(isset($options['search'])){
+      $query_string .= ' AND name LIKE :like';
+      $options['like'] = '%' . $options['search'] . '%';
+    }
+
+    $query = DB::connection()->prepare($query_string);
+    $query->execute($options);
+
+    $rows = $query->fetchAll();
+    $tasks = array();
+
+    foreach($rows as $row){
+      $tasks[] = new Task($row);
+    }
+
+    return $tasks;
+  }
     
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Task');
@@ -92,9 +113,9 @@ class Task extends BaseModel {
         return $errors;
     }
 
-    public function validate_description() {
+    public function validate_info() {
         $errors = array();
-        if (self::validate_string_length($this->description, 1, 400) === false) {
+        if (self::validate_string_length($this->info, 1, 400) === false) {
             $errors[] = 'Description can\'t be empty';
         }
         return $errors;

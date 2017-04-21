@@ -2,20 +2,29 @@
 {% block content %}
 {% import "macros/forms.html" as forms %}
 
-<h1>{{task.name}}</h1>
+<h1>{{task.taskname}}</h1>
 <p>
     {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
-    <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Edit task!</a>
+    <a href="{{base_path}}/task/{{task.id}}/edit" class="button">Edit task!</a>
 </p>
 
 <ul>
     <li><strong>Deadline:</strong> {{task.deadline}}</li>
-    <li><strong>Priority:</strong> {{task.priority_v}}</li>
-    <li><strong>Status:</strong> {{task.status}}</li>
+    <li><strong>Priority:</strong> {{task.priority_id}}</li>
+    <li><strong>Category:</strong> {{task.category_name}}</li>
+    <li><strong>Status:</strong> {{task.status_id}}</li>
+
+    {% if {{task.status_id}} == 3 %}
+      <label class="label label-success">Done!</label>
+      {% else if {{task.status_id}} == 2 %}
+      <label class="label label-warning">In progress!</label>
+    {% else %}
+      <label class="label label-danger">Not Started!</label>
+    {% endif %}
     <li><strong>Added:</strong> {{task.added}}</li>
 </ul>
 
 <p>
-    {{task.description}}
+    {{task.info}}
 </p>
 {% endblock %}

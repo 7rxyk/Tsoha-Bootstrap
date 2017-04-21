@@ -20,7 +20,8 @@ CREATE TABLE task_status(
 
 CREATE TABLE category(
   id              SERIAL PRIMARY KEY,
-  category_name   VARCHAR(20) NOT NULL
+  category_name   VARCHAR(20) NOT NULL,
+  person_id       INTEGER REFERENCES person(id)
 );
 
 CREATE TABLE task(
