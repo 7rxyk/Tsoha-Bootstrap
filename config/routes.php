@@ -48,7 +48,7 @@ $routes->post('/task/new', function() {
 });
 
 $routes->get('/task/:id', function($id) {
-    TaskController::findTask($id);
+    TaskController::findUsersTasks($id);
 });
 
 $routes->get('/task/:id/edit', function ($id) {

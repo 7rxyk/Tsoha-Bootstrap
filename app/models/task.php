@@ -52,7 +52,7 @@ class Task extends BaseModel {
         return $tasks;
     }
 
-    public static function findUser($id) {
+    public static function findUsersTasks($id) {
         $query = DB::connection()->prepare('SELECT * FROM task WHERE person_id = :id');
         $query->execute(array('id' => $id));
 

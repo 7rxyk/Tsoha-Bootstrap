@@ -9,7 +9,7 @@ class Category extends BaseModel {
         $this->validators = array('validate_category_name');
     }
 
-    public static function findAllByUser($person_id) {
+    public static function findCategoriesByUser($person_id) {
         $query = DB::connection()->prepare('SELECT * FROM category WHERE person_id = :person_id');
         $query->execute(array('person_id' => $person_id));
         $rows = $query->fetchAll();
@@ -24,7 +24,7 @@ class Category extends BaseModel {
         return $categories;
     }
 
-    public static function findAllByTask($task_id) {
+    public static function findCategoriesByTask($task_id) {
         $query = DB::connection()->prepare('SELECT category.* FROM category JOIN task_category ON task_category.category_id = category.id WHERE task_category.task_id = :id');
         $query->execute(array('id' => $task_id));
         $rows = $query->fetchAll();

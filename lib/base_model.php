@@ -30,7 +30,7 @@ class BaseModel {
     }
 
     public static function number($id) {
-        if ($id === null || !is_numeric($id) || $id < 1) {
+        if ($id === null || !filter_var($id, FILTER_VALIDATE_INT) || $id < 1) {
             return false;
         } else {
             return true;
