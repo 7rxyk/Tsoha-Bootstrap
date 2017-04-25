@@ -1,7 +1,5 @@
 <?php
 
-require 'app/models/task.php';
-
 class TaskController extends BaseController {
 
     public static function findWithSearch() {

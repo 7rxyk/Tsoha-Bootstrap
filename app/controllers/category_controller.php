@@ -1,7 +1,5 @@
 <?php
 
-require 'app/models/category.php';
-
 class CategoryController extends BaseController {
 
     public static function all() {

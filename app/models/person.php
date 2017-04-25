@@ -29,13 +29,12 @@ class Person extends BaseModel {
         $query->execute(array('username' => $this->username, 'passsword' => $this->passsword));
         $row = $query->fetch();
         $this->id = $row['id'];
-        
-        /*
+    
         $person = new Person(array(
             'id' => $row['id'],
             'username' => $row['username'],
             'passsword' => $row['passsword']
-        ));*/
+        ));
         
     }
 
