@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Add new task</h1>
 
-<form method="post" action="{{base_path}}/task/{{task.id}}">
+<form method="post" action="{{base_path}}/task/new">
     <div class="form-group">
         <label>Task</label>
         <input class="input" name="taskname" value="{{task.taskname}}" type="text" placeholder="TASK">
@@ -26,14 +26,14 @@
     <label>Priority</label>
     <select class="form-control" name="priority_id">
         <option title="High" name="High" value="1" >HIGH</option>
-        <option title="Medium" name="Medium"  value="{{task.priority_id}}">MEDIUM</option>
-        <option title="Low" name="Low" value="{{task.priority_id}}">LOW</option>
+        <option title="Medium" name="Medium"  value="2">MEDIUM</option>
+        <option title="Low" name="Low" value="3">LOW</option>
     </select>
 
     <fieldset>
         <legend>Select a task status: </legend>
-        <label for="1" class="checkbox"><span class="checkbox"></span>Not Started</label>
-        <input type="radio" name="status_id" value="1" class=".checkbox">
+        <label for="1" class="checkbox">Not Started</label>
+        <input type="radio" name="status_id" value="1" class=".checkbox" checked>
         <label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
         <input type="radio" name="status_id" value="2" class=".checkbox">
         <label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>

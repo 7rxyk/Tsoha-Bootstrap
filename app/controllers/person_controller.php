@@ -50,7 +50,7 @@ class PersonController extends BaseController {
     }
 
     public static function find($id) {
-        return Person::find($id);
+        return Person::findUser($id);
     }
 
 }

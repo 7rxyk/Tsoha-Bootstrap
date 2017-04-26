@@ -2,7 +2,7 @@
 
 class Task extends BaseModel {
 
-    public $id, $taskname, $info, $deadline, $priority_id, $status_id, $added;
+    public $id, $taskname, $info, $deadline, $priority_id, $status_id, $added, $person_id;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -96,8 +96,8 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  info, deadline, priority_id, status_id) VALUES (:taskname, :info, :deadline, :priority_id, :status_id) RETURNING id');
-        $query->execute(array('taskname' => $this->taskname, 'info' => $this->info, 'deadline' => $this->deadline, 'priority_id' => $this->priority_id, 'status_id' => $this->status_id));
+        $query = DB::connection()->prepare('INSERT INTO Task (taskname,  info, deadline, priority_id, status_id, person_id) VALUES (:taskname, :info, :deadline, :priority_id, :status_id, :person_id) RETURNING id');
+        $query->execute(array('taskname' => $this->taskname, 'info' => $this->info, 'deadline' => $this->deadline, 'priority_id' => $this->priority_id, 'status_id' => $this->status_id, 'person_id' => $this->person_id));
         $row = $query->fetch();
         $this->id = $row['id'];
     }

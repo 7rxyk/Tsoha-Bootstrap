@@ -71,7 +71,7 @@ class Person extends BaseModel {
     }
 
     public function categories() {
-        return Category::findAll($this->id);
+        return Category::findCategoriesByUser($this->id);
     }
 
     public function validate_username() {

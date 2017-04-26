@@ -67,6 +67,10 @@ $routes->post('/task/:id/destroy', function($id) {
 
 // category routes:
 
+$routes->get('/category/:id/edit', function ($id) {
+    CategoryController::edit($id);
+});
+
 $routes->post('/category/:id/edit', function ($id) {
     CategoryController::update($id);
 });

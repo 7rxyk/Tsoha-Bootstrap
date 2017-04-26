@@ -19,7 +19,8 @@ class TaskController extends BaseController {
 
     public static function newTask() {
         self::check_logged_in();
-        View::make('/task/new.html');
+        $categories = Category::findCategoriesByUser($_SESSION['person']);
+        View::make('/task/new.html', array('categories' => $categories));
     }
 
     public static function userTasks() {
@@ -44,16 +45,17 @@ class TaskController extends BaseController {
         $params = $_POST;
 
         $category = $params['category'];
-        $priority_id = $params['priority_id'];
-        $status_id = $params['status_id'];
+        
+        $person_id = self::get_user_logged_in()->id;
 
         $attributes = array(
             'taskname' => $params['taskname'],
             'info' => $params['info'],
             'deadline' => $params['deadline'],
             'category' => $category,
-            'priority_id' => $priority_id,
-            'status_id' => $status_id
+            'priority_id' => $params['priority_id'],
+            'status_id' => $params['status_id'],
+            'person_id' => $person_id 
         );
 
         $task = new Task($attributes);
@@ -61,7 +63,7 @@ class TaskController extends BaseController {
 
         if (count($errors) == 0) {
             $task->save();
-            Redirect::to('/list/task' . $task->id, array('message' => 'New task is added to your to do -list!'));
+            Redirect::to('/list', array('message' => 'New task is added to your to do -list!'));
         } else {
             View::make('/task/new.html', array('errors' => $errors, 'attributes' => $attributes));
         }

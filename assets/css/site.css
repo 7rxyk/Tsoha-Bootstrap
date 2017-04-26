@@ -60,7 +60,7 @@ button, .button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #F6E767;
+    background: lightyellow;
     width: 100%;
     border: 0;
     padding: 15px;
@@ -84,16 +84,19 @@ h1 {
     padding-bottom: 50px;
 }
 
+.table > thead > tr > th {
+    text-align: center;
+    border-bottom: none;
+}
+
 tbody tr:hover  {
-    background-color: #ffadc6;
+    background-color: lightgray;
 }
 
 a.button{
-    color: #F6F5EC;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    padding: 20px;
 }
 
 a {
@@ -134,4 +137,4 @@ legend {
     text-align: left;
     font-size: 20px;
 }
-    
+
