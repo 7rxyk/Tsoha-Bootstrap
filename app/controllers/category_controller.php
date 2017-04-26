@@ -2,10 +2,15 @@
 
 class CategoryController extends BaseController {
 
-    public static function all() {
+    public static function allByUser() {
         self::check_logged_in();
-        View::make('/category/list.html', array('categories' => Category::findAllByUser(self::get_user_logged_in()->id)));
+        View::make('/category/list.html', array('categories' => Category::findCategoriesByUser(self::get_user_logged_in()->id)));
     }
+    /*
+    public static function allByTask() {
+        self::check_logged_in();
+        View::make('/category/list.html', array('categories' => Category::findCategoriesByTask()));
+    }*/
 
     public static function newCategory() {
         self::check_logged_in();

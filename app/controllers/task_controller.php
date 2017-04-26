@@ -25,8 +25,8 @@ class TaskController extends BaseController {
     public static function userTasks() {
         self::check_logged_in();
 
-        $person = $_SESSION['person'];
-        $tasks = Task::findUser($person);
+        $person_id = $_SESSION['person'];
+        $tasks = Task::findUsersTasks($person_id);
         View::make('/task/list.html', array('tasks' => $tasks));
     }
 
@@ -61,7 +61,7 @@ class TaskController extends BaseController {
 
         if (count($errors) == 0) {
             $task->save();
-            Redirect::to('/list' . $task->id, array('message' => 'New task is added to your to do -list!'));
+            Redirect::to('/list/task' . $task->id, array('message' => 'New task is added to your to do -list!'));
         } else {
             View::make('/task/new.html', array('errors' => $errors, 'attributes' => $attributes));
         }

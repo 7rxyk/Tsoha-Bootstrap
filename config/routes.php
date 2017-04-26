@@ -48,8 +48,10 @@ $routes->post('/task/new', function() {
 });
 
 $routes->get('/task/:id', function($id) {
-    TaskController::findUsersTasks($id);
+    TaskController::findTask($id);
 });
+
+
 
 $routes->get('/task/:id/edit', function ($id) {
     TaskController::edit($id);
@@ -72,7 +74,7 @@ $routes->post('/category/:id/delete', function ($id) {
     CategoryController::destroy($id);
 });
 $routes->get('/category/all', function () {
-    CategoryController::all();
+    CategoryController::allByUser();
 });
 $routes->get('/category/new', function () {
     CategoryController::newCategory();

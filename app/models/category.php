@@ -75,7 +75,7 @@ class Category extends BaseModel {
 
     public function validate_category_name() {
         $errors = array();
-        if (self::validate_string_length($this->category_name, 3, 20) == false) {
+        if (self::validate_length($this->category_name, 3, 20) == false) {
             $errors[] = 'Categorynames\'s length is invalid. It must be 3 - 20 characters (was ' . strlen($this->category_name) . ').';
         }
         return $errors;

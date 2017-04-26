@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Add new task</h1>
 
-<form method="post" action="{{base_path}}/task">
+<form method="post" action="{{base_path}}/task/{{task.id}}">
     <div class="form-group">
         <label>Task</label>
         <input class="input" name="taskname" value="{{task.taskname}}" type="text" placeholder="TASK">
