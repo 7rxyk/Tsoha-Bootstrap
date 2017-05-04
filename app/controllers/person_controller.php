@@ -28,12 +28,12 @@ class PersonController extends BaseController {
     public static function register() {
         self::not_logged();
         $params = $_POST;
-        $person = new person(array(
+        $person = new Person(array(
             'username' => $params['username'],
-            'passsword' => $params['passsword'],
+            'passsword' => $params['passsword']
         ));
         $errors = $person->errors();
-        if (person::findByUsername($person->username) != null) {
+        if (Person::findByUsername($person->username) != null) {
             $errors += array('Username already exists.');
         }
         if (count($errors) > 0) {

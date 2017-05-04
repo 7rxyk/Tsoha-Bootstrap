@@ -10,27 +10,6 @@ class Task extends BaseModel {
             'validate_status_id');
     }
 
-    public static function allWithOption($options) {
-        $query_string = 'SELECT * FROM task WHERE person_id = :person_id';
-        $options = array('person_id' => $options['person_id']);
-        if (isset($options['search'])) {
-            $query_string .= ' AND name LIKE :like';
-            $options['like'] = '%' . $options['search'] . '%';
-        }
-
-        $query = DB::connection()->prepare($query_string);
-        $query->execute($options);
-
-        $rows = $query->fetchAll();
-        $tasks = array();
-
-        foreach ($rows as $row) {
-            $tasks[] = new Task($row);
-        }
-
-        return $tasks;
-    }
-
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM task');
         $query->execute();
@@ -100,6 +79,17 @@ class Task extends BaseModel {
         $query->execute(array('taskname' => $this->taskname, 'info' => $this->info, 'deadline' => $this->deadline, 'priority_id' => $this->priority_id, 'status_id' => $this->status_id, 'person_id' => $this->person_id));
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM task WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE task SET id = :id, taskname = :taskname, person_id = :person_id, priority_id = :priority_id, '
+                . 'info = :info, deadline = :deadline, status_id = :status_id WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'category_name' => $this->category_name, 'person_id' => $this->person_id));
     }
 
     public function validate_name() {

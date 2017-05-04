@@ -47,7 +47,7 @@ class Person extends BaseModel {
             $person = new Person(array(
                 'id' => $row['id'],
                 'username' => $row['username'],
-                'passsword' => $row['passsword'],
+                'passsword' => $row['passsword']
             ));
             return $person;
         }

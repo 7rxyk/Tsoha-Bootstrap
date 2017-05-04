@@ -1,43 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Update task</h1>
+<h1>Add new task</h1>
 
 <form method="post" action="{{base_path}}/task/{{task.id}}/edit">
+
     <div class="form-group">
         <label>Task</label>
-        <input class="input" name="taskname" value="{{attributes.taskname}}" type="text" placeholder="TASK">
-
-        <label>Additional info</label>
-        <textarea class="input" name="info" value="{{attributes.info}}" placeholder="ADDITIONAL INFO"></textarea>
-
-        <label>Deadline</label>
-        <input type="text" name="deadline" placeholder="YYYY-MM-DD" value="{{attributes.deadline}}"/>
+        <input id="taskname" name="taskname" class="form-control" type="text" required value="{{task.taskname}}">
     </div>
 
-    <label>Priority</label>
-    <select class="form-control" name="priority_id">
-        <option title="high"  value="{{task.priority_id}}">HIGH</option>
-        <option title="medium"  value="{{task.priority_id}}">MEDIUM</option>
-        <option title="low"  value="{{task.priority_id}}">LOW</option>
-    </select>
+    <div class="form-group">
+        <label for="info">Additional info</label>
+        <textarea id="info" name="info" required rows="4" class="form-control">{{task.info}}</textarea>
+    </div>
 
-    <fieldset>
-        <legend>Select a task status: </legend>
-        <label for="1" class="checkbox"><span class="checkbox"></span>Not Started</label>
-        <input type="radio" name="status_id" value="{{task.status_id}}" class=".checkbox">
-        <label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
-        <input type="radio" name="status_id" value="{{task.status_id}}" class=".checkbox">
-        <label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>
-        <input type="radio" name="status_id" value="{{task.status_id}}" class=".checkbox">
-    </fieldset>
+    <label>Deadline</label>
+    <input type="text" name="deadline" placeholder="DD.MM.YYYY" value="{{task.deadline}}"/> 
+
+    <div class="form-group">
+        <label>Priority</label>
+        <select class="form-control" name="priority_id">
+            <option title="High" name="High" value="3" >HIGH</option>
+            <option title="Medium" name="Medium"  value="2">MEDIUM</option>
+            <option title="Low" name="Low" value="1">LOW</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Categories</label> <br/>
+        {% if user_logged_in.categories == null %} No added categories.
+        {% else %}
+        {% for category in user_logged_in.categories %}
+        <label><input type="checkbox" value="{{category.id}}" name="categories[]">{{category.category_name}}</label>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Select a task status: </label> <br/>
+        <label class="radio-inline" for="1">
+            <input type="radio" name="status_id" value="1" id="1" checked>Not Started
+        </label>
+        <label class="radio-inline" for="2">
+            <input type="radio" name="status_id" value="2" id="2">In progress
+        </label>
+        <label class="radio-inline" for="3">
+            <input type="radio" name="status_id" value="3" id="3">Completed
+        </label>
+    </div>
     <br>
     <br>
     <div class="form-group">
-        <button class="button" type="submit" >Update</button>
+        <button class="button" type="submit" >Save</button>
     </div>
 </form>
 
-<link href="{{base_path}}/assets/css/angular-date-picker.css" rel="stylesheet">
-
-<script type="text/javascript" src="{{base_path}}/assets/js/angular-date-picker.js"></script>
 {% endblock %}

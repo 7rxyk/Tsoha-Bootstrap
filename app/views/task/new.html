@@ -3,42 +3,50 @@
 <h1>Add new task</h1>
 
 <form method="post" action="{{base_path}}/task/new">
+
     <div class="form-group">
         <label>Task</label>
-        <input class="input" name="taskname" value="{{task.taskname}}" type="text" placeholder="TASK">
-
-        <label>Additional info</label>
-        <textarea class="input" name="info" value="{{task.info}}" placeholder="ADDITIONAL INFO"></textarea>
-
+        <input name="taskname" required value="{{task.taskname}}" class="form-control" type="text" placeholder="TASK">
+    </div>
+    <div class="form-group">
+        <label for="info">Additional info</label>
+        <textarea class="input" id="info" name="info" rows="3" required placeholder="ADDITIONAL INFO">{% if task %} {{task.info}} {% endif %}</textarea>
+    </div>
+    <div class="form-group">
         <label>Deadline</label>
         <input type="text" name="deadline" placeholder="YYYY-MM-DD" value="{{task.deadline}}"/>
-
-        <div class="form-group">
-            <label>Category</label>
-            <select class="form-control" name="category">
-                {% for category in categories %}
-                <option value="{{category.id}}">{{category.category_name}}</option>
-                {% endfor %}
-            </select>
-        </div>
-
     </div>
-    <label>Priority</label>
-    <select class="form-control" name="priority_id">
-        <option title="High" name="High" value="1" >HIGH</option>
-        <option title="Medium" name="Medium"  value="2">MEDIUM</option>
-        <option title="Low" name="Low" value="3">LOW</option>
-    </select>
 
-    <fieldset>
-        <legend>Select a task status: </legend>
-        <label for="1" class="checkbox">Not Started</label>
-        <input type="radio" name="status_id" value="1" class=".checkbox" checked>
-        <label for="2" class="checkbox"><span class="checkbox"></span>In progress</label>
-        <input type="radio" name="status_id" value="2" class=".checkbox">
-        <label for="3" class="checkbox"><span class="checkbox"></span>Completed</label>
-        <input type="radio" name="status_id" value="3" class=".checkbox">
-    </fieldset>
+    <div class="form-group">
+        <label>Priority</label>
+        <select class="form-control" name="priority_id">
+            <option title="High" name="High" value="3" >HIGH</option>
+            <option title="Medium" name="Medium"  value="2">MEDIUM</option>
+            <option title="Low" name="Low" value="1">LOW</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Categories</label> <br/>
+        {% if user_logged_in.categories == null %} No added categories.
+        {% else %}
+        {% for category in user_logged_in.categories %}
+        <label><input type="checkbox" value="{{category.id}}" name="categories[]">{{category.category_name}}</label>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <br/>
+    <div class="form-group">
+        <label>Select a task status: </label> <br/>
+        <label class="radio-inline" for="1">
+            <input type="radio" name="status_id" value="1" id="1" checked>Not Started
+        </label>
+        <label class="radio-inline" for="2">
+            <input type="radio" name="status_id" value="2" id="2">In progress
+        </label>
+        <label class="radio-inline" for="3">
+            <input type="radio" name="status_id" value="3" id="3">Completed
+        </label>
+    </div>
     <br>
     <br>
     <div class="form-group">

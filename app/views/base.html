@@ -12,10 +12,7 @@
         </title>
 
         {% block head %}
-        <!-- Bootstrap (tyylitiedosto) -->
-        <link href="{{base_path}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Oma tyylitiedostomme -->
+        <link href="{{base_path}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
         <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
         {% endblock %}
     </head>
@@ -31,7 +28,7 @@
                         <span class="icon-bar"></span>
 
                     </button>
-                    <a class="navbar-brand" {% if user_logged_in %} href="{{base_path}}/task/list.html" {% else %} href="{{base_path}}" {% endif %} ><strong>To-do list</strong></a>
+                    <a class="navbar-brand" {% if user_logged_in %} href="{{base_path}}/list" {% else %} href="{{base_path}}" {% endif %} ><strong>To-do list</strong></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navigation">

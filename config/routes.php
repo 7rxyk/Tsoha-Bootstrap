@@ -34,10 +34,6 @@ $routes->get('/logout', function () {
 $routes->get('/list', function() {
     TaskController::userTasks();
 });
-/*
-$routes->get('/list', function() {
-    TaskController::findWithSearch();
-});*/
 
 $routes->get('/task/new', function() {
     TaskController::newTask();
@@ -51,8 +47,6 @@ $routes->get('/task/:id', function($id) {
     TaskController::findTask($id);
 });
 
-
-
 $routes->get('/task/:id/edit', function ($id) {
     TaskController::edit($id);
 });
@@ -61,7 +55,7 @@ $routes->post('/task/:id/edit', function($id) {
     TaskController::update($id);
 });
 
-$routes->post('/task/:id/destroy', function($id) {
+$routes->get('/task/:id/delete', function($id) {
     TaskController::destroy($id);
 });
 
@@ -74,9 +68,13 @@ $routes->get('/category/:id/edit', function ($id) {
 $routes->post('/category/:id/edit', function ($id) {
     CategoryController::update($id);
 });
-$routes->post('/category/:id/delete', function ($id) {
+$routes->get('/category/:id/delete', function ($id) {
     CategoryController::destroy($id);
 });
+/*
+$routes->post('/category/:id/delete', function ($id) {
+    CategoryController::destroy($id);
+});*/
 $routes->get('/category/all', function () {
     CategoryController::allByUser();
 });
@@ -86,3 +84,5 @@ $routes->get('/category/new', function () {
 $routes->post('/category/new', function () {
     CategoryController::createCategory();
 });
+
+

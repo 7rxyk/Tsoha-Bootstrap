@@ -29,7 +29,7 @@ CREATE TABLE task(
   person_id   INTEGER REFERENCES person(id), -- Viiteavain person-tauluun
   taskname    VARCHAR(50) NOT NULL,
   info        VARCHAR(400),
-  deadline    DATE,
+  deadline    VARCHAR(10),
   added       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   priority_id INTEGER REFERENCES task_priority (id),
   status_id   INTEGER REFERENCES task_status (id)

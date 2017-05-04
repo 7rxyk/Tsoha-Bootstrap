@@ -10,14 +10,6 @@
 <br><a href="{{base_path}}/task/new" class="button">Add new task!</a><br>
 <br>
 
-<form method="get" action="" class="form-inline">
-    <div class="form group">
-        <input type="text" name="search" class="form-control" placeholder="Search for...">
-    </div>
-
-    <button type="submit" >Search!</button>
-</form>
-
 <br>
 
 <table class="table">
@@ -37,11 +29,37 @@
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.taskname}}</td>
             <td>{{task.deadline}}</td>
-            <td>{{task.status_id}}</td>
-            <td>{{task.priority_id}}</td>
+            
+            
+            
+            <td>{% if task.status_id == 1 %}
+                <label class="label label-danger">Task not started!</label>
+                {% endif %}
+                {% if task.status_id == 2 %}
+                <label class="label label-warning">Task in progress!</label>
+                {% endif %}
+                {% if task.status_id == 3 %}
+                <label class="label label-success">Task Completed!</label>
+                {% endif %}
+            </td>
+            
+            <td>
+                {% if task.priority_id == 1 %}
+                <label class="label label-success">Low</label>
+                {% endif %}
+                {% if task.priority_id == 2 %}
+                <label class="label label-warning">Medium</label>
+                {% endif %}
+                {% if task.priority_id == 3 %}
+                <label class="label label-danger">High</label>
+                {% endif %}
+            </td>
             <td>{{task.added}}</td>
 
             <td><a class="button" href="{{base_path}}/task/{{task.id}}/edit">Edit</a></td>
+            <td><a class="button" href="{{base_path}}/task/{{task.id}}/delete" class="destroy-form" data-confirm="Sure you want to remove a task?">Delete</a></td>
+
+            </form>
         </tr>
         {% endfor %}
     </tbody>
