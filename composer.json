@@ -11,6 +11,12 @@
 		"slim/slim": "2.*",
 		"twig/twig": "~1.5",
 		"raveren/kint": "v0.9",
-		"zeuxisoo/slim-whoops": "0.3.0"
-	}
+		"zeuxisoo/slim-whoops": "0.3.0",
+		"silex/silex": "^2.0.4",
+		"monolog/monolog": "^1.22",
+		"symfony/twig-bridge": "^3"
+	},
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
 }
